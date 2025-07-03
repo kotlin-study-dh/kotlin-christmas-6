@@ -1,9 +1,5 @@
-package christmas.domain
+package christmas.domain.menu
 
-import christmas.domain.menu.Category
-import christmas.domain.menu.Menu
-import christmas.domain.menu.Menus
-import christmas.domain.menu.Money
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
