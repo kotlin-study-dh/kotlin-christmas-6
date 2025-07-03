@@ -26,11 +26,13 @@ Badges will be given according to the discount amount.
 
 ## Domain
 
-- [ ] Make Discounters: i'll implement this using an interface.
-    - [ ] Weekday Discounter
+- [x] Make Discounters: i'll implement this using an interface.
+    - [x] Weekday Discounter
     - [x] Weekend Discounter
-    - [ ] Special Discounter
-    - [ ] Present Discounter
+    - [x] Special Discounter
+    - [x] Present Discounter
+
+- [ ] 
 
 - [ ] Reception
     - [ ] validate domain requirements (e.g, maximum number of menus that can be received, verify valid reserve date)

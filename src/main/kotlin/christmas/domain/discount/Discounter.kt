@@ -5,4 +5,6 @@ import christmas.domain.menu.Money
 interface Discounter {
 
     fun discount(): Money
+
+    fun isApplicable(): Boolean
 }

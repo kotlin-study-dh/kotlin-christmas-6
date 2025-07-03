@@ -2,7 +2,9 @@ package christmas.domain.discount
 
 import christmas.domain.menu.Money
 import christmas.domain.order.Order
+import christmas.domain.order.Reservation
 import org.junit.jupiter.api.Test
+import support.DateDummy
 import support.MenuDummy
 
 class WeekdayDiscounterTest {
@@ -15,7 +17,8 @@ class WeekdayDiscounterTest {
                 MenuDummy.createMain("BARBECUE", 54_000)
             )
         )
-        val discounter = WeekdayDiscounter(order)
+        val reservation = Reservation(DateDummy.weekday, order)
+        val discounter = WeekdayDiscounter(reservation)
 
         // when
         val actual = discounter.discount()
@@ -23,5 +26,43 @@ class WeekdayDiscounterTest {
         // then
         val expect = order.aggregatePurchaseAmount() - Money(WeekendDiscounter.FIXED_DISCOUNT_COST)
         assert(actual == expect)
+    }
+
+    @Test
+    fun `weekday is applicable`() {
+        // given
+        val order = Order(
+            listOf(
+                MenuDummy.createDessert("CHOCOLATE-CAKE", 15_000),
+                MenuDummy.createMain("BARBECUE", 54_000)
+            )
+        )
+        val reservation = Reservation(DateDummy.weekday, order)
+        val discounter = WeekdayDiscounter(reservation)
+
+        // when
+        val applicable = discounter.isApplicable()
+
+        // then
+        assert(applicable)
+    }
+
+    @Test
+    fun `weekend is not applicable`() {
+        // given
+        val order = Order(
+            listOf(
+                MenuDummy.createDessert("CHOCOLATE-CAKE", 15_000),
+                MenuDummy.createMain("BARBECUE", 54_000)
+            )
+        )
+        val reservation = Reservation(DateDummy.weekend, order)
+        val discounter = WeekdayDiscounter(reservation)
+
+        // when
+        val applicable = discounter.isApplicable()
+
+        // then
+        assert(!applicable)
     }
 }

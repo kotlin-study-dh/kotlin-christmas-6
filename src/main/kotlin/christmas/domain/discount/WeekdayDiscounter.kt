@@ -2,14 +2,18 @@ package christmas.domain.discount
 
 import christmas.domain.menu.Category
 import christmas.domain.menu.Money
-import christmas.domain.order.Order
+import christmas.domain.order.Reservation
 
-class WeekdayDiscounter(val order: Order) : Discounter {
+class WeekdayDiscounter(val reservation: Reservation) : Discounter {
 
     override fun discount(): Money {
-        val count = order.count(Category.DESSERT)
+        val count = reservation.countMenuByCategory(Category.DESSERT)
         val totalDiscount = Money(FIXED_DISCOUNT_COST * count)
-        return order.aggregatePurchaseAmount() - totalDiscount
+        return reservation.aggregatePurchaseAmount() - totalDiscount
+    }
+
+    override fun isApplicable(): Boolean {
+        return reservation.weekday
     }
 
     companion object {
