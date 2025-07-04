@@ -1,6 +1,7 @@
 package christmas.domain.order
 
 import christmas.domain.Menu
+import christmas.domain.MenuSection
 import christmas.domain.Price
 import christmas.domain.sum
 import java.time.LocalDate
@@ -9,9 +10,18 @@ class Order(
     val placedDate: LocalDate,
     val orderItems: Map<Menu, Int>
 ) {
-    fun calculatePrice(): Price {
-        return orderItems.map { (menu, amount) -> menu.price times amount }.sum()
+    val totalPlacedPrice: Price
+        get() = orderItems.map { (menu, amount) -> menu.price times amount }.sum()
+
+    init {
+        require (orderItems.isNotEmpty()) {
+            "Order items must not be empty"
+        }
+        require(!orderItems.values.contains(0)) {
+            "Order must not contain items with zero quantity"
+        }
+        require(orderItems.filterNot { (orderItem, _) -> orderItem.section == MenuSection.BEVERAGE }.isNotEmpty()) {
+            "At least one non-beverage item must be included in the order"
+        }
     }
-
 }
-

@@ -4,6 +4,7 @@ import christmas.domain.Menu
 import christmas.domain.Price
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.time.LocalDate
 
 class OrderTest {
@@ -15,10 +16,36 @@ class OrderTest {
         val order = Order(LocalDate.now(), orderItems)
 
         // When
-        val totalPrice: Price = order.calculatePrice()
+        val totalPrice: Price = order.totalPlacedPrice
 
         // Then
         assertThat(totalPrice).isEqualTo(Price.from(8_500))
     }
 
+    @Test
+    fun `order item must not be empty`() {
+        // Given
+        val orderItems = emptyMap<Menu, Int>()
+
+        // When & Then
+        assertThrows<IllegalArgumentException> { Order(LocalDate.of(2023, 12, 1), orderItems) }
+    }
+
+    @Test
+    fun `order item has to more than zero quantity`() {
+        // Given
+        val orderItems = mapOf(Menu.TAPAS to 0, Menu.COKE_ZERO to 1)
+
+        // When & Then
+        assertThrows<IllegalArgumentException> { Order(LocalDate.of(2023, 12, 1), orderItems) }
+    }
+
+    @Test
+    fun `cannot order beverages only`() {
+        // Given
+        val orderItems = mapOf(Menu.COKE_ZERO to 1, Menu.RED_WINE to 2)
+
+        // When & Then
+        assertThrows<IllegalArgumentException> { Order(LocalDate.of(2023, 12, 1), orderItems) }
+    }
 }
