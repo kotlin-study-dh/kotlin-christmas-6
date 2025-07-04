@@ -9,6 +9,9 @@ object ChristmasDdayDiscountPolicy : DiscountPolicy {
     private val END_DATE = LocalDate.of(2023, 12, 25)
 
     override fun isEligibleForDiscount(order: Order): Boolean {
+        if (!DecemberDiscountBasePolicy.isEligibleForDiscount(order)) {
+            return false
+        }
         return order.placedDate in START_DATE..END_DATE
     }
 

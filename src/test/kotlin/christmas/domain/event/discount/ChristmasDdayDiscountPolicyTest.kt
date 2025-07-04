@@ -14,7 +14,7 @@ class ChristmasDdayDiscountPolicyTest {
     @ParameterizedTest
     @MethodSource("validDates")
     fun `return true when placed date belongs to event period`(date: LocalDate) {
-        val order = Order(date, mapOf(Menu.MUSHROOM_SOUP to 1))
+        val order = Order(date, mapOf(Menu.MUSHROOM_SOUP to 1, Menu.T_BONE_STEAK to 1))
 
         val actual = ChristmasDdayDiscountPolicy.isEligibleForDiscount(order)
 
