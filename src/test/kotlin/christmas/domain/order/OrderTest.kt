@@ -48,4 +48,13 @@ class OrderTest {
         // When & Then
         assertThrows<IllegalArgumentException> { Order(LocalDate.of(2023, 12, 1), orderItems) }
     }
+
+    @Test
+    fun `cannot order more than 20 menu items`() {
+        // Given
+        val orderItems = mapOf(Menu.TAPAS to 21)
+
+        // When & Then
+        assertThrows<IllegalArgumentException> { Order(LocalDate.of(2023, 12, 1), orderItems) }
+    }
 }

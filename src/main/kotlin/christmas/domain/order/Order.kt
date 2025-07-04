@@ -23,5 +23,12 @@ class Order(
         require(orderItems.filterNot { (orderItem, _) -> orderItem.section == MenuSection.BEVERAGE }.isNotEmpty()) {
             "At least one non-beverage item must be included in the order"
         }
+        require(orderItems.values.sum() <= MAX_TOTAL_MENU_QUANTITY) {
+            "You can order up to $MAX_TOTAL_MENU_QUANTITY menu items per order."
+        }
+    }
+
+    companion object {
+        private val MAX_TOTAL_MENU_QUANTITY = 20
     }
 }
