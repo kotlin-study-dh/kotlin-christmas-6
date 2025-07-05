@@ -1,9 +1,13 @@
 package christmas.menu
 
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 
 class OrderTest {
+    private val defaultDate: LocalDate = LocalDate.of(2023, 12, 25)
+
     @Test
     fun `fails to create Order when Menus are not unique`() {
         // given
@@ -14,7 +18,7 @@ class OrderTest {
         )
 
         // when & then
-        assertThatThrownBy { Order(menuAndCount) }
+        assertThatThrownBy { Order.of(menuAndCount, defaultDate) }
             .isExactlyInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("Menu must be unique.")
     }
@@ -28,7 +32,7 @@ class OrderTest {
         )
 
         // when & then
-        assertThatThrownBy { Order(menuAndCount) }
+        assertThatThrownBy { Order.of(menuAndCount, defaultDate) }
             .isExactlyInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("Cannot order drinks only.")
     }
@@ -42,7 +46,7 @@ class OrderTest {
         )
 
         // when & then
-        assertThatThrownBy { Order(menuAndCount) }
+        assertThatThrownBy { Order.of(menuAndCount, defaultDate) }
             .isExactlyInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("Each menu count must be greater than or equal to 1.")
     }
@@ -56,8 +60,25 @@ class OrderTest {
         )
 
         // when & then
-        assertThatThrownBy { Order(menuAndCount) }
+        assertThatThrownBy { Order.of(menuAndCount, defaultDate) }
             .isExactlyInstanceOf(IllegalArgumentException::class.java)
             .hasMessageContaining("Total menu count must not exceed 20.")
+    }
+
+    @Test
+    fun `sums menu counts of a specific category`() {
+        // given
+        val menuAndCount = listOf(
+            "초콜릿 케이크" to 2,
+            "아이스크림" to 1,
+            "제로 콜라" to 3
+        )
+        val order = Order.of(menuAndCount, defaultDate)
+
+        // when
+        val dessertCount = order.sumMenuCountsOf(Category.DESSERT)
+
+        // then
+        assertThat(dessertCount).isEqualTo(3)
     }
 }

@@ -24,9 +24,7 @@ enum class Menu(
     CHAMPAGNE(DRINK, "샴페인", 25_000),
     ;
 
-    fun isDrink(): Boolean {
-        return this.category == DRINK
-    }
+    fun isCategory(category: Category) = this.category == category
 
     companion object {
         fun from(korName: String): Menu {
