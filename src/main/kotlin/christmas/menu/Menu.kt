@@ -24,6 +24,10 @@ enum class Menu(
     CHAMPAGNE(DRINK, "샴페인", 25_000),
     ;
 
+    fun isDrink(): Boolean {
+        return this.category == DRINK
+    }
+
     companion object {
         fun from(korName: String): Menu {
             return entries.find { it.korName == korName }
