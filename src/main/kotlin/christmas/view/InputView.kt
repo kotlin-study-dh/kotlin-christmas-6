@@ -21,12 +21,12 @@ object InputView {
     }
 
     private fun readMenu(placedDate: LocalDate): Order {
-        val orderItems = retry {
+        retry {
             println(
                 "Please tell us the menu items you’d like to order and their quantities.\n" +
                         "(e.g. Seafood Pasta-2,Red Wine-1,Chocolate Cake-1)"
             )
-            Console.readLine().split(",")
+            val orderItems = Console.readLine().split(",")
                 .associate { it ->
                     val split = it.split("-")
                     val menu = Menu.from(split[0])
@@ -34,8 +34,8 @@ object InputView {
                     val quantity = split[1].toInt()
                     menu to quantity
                 }
+            return Order.of(placedDate, orderItems)
         }
-        return Order.of(placedDate, orderItems)
     }
 
     inline fun <T> retry(
