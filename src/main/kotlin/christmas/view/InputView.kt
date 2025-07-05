@@ -8,7 +8,7 @@ import java.time.LocalDate
 object InputView {
     fun readOrder(): Order {
         println("Hello! This is the December Event Planner for the Woowa Restaurant.")
-        return Order(readVisitDate(), readMenu())
+        return Order.of(readVisitDate(), readMenu())
     }
 
     private fun readVisitDate(): LocalDate {

@@ -2,8 +2,8 @@ package christmas.domain.event.discount
 
 import christmas.domain.Price
 import christmas.domain.event.EventPolicy
-import christmas.domain.order.Order
+import christmas.domain.order.OrderContext
 
 interface DiscountPolicy: EventPolicy {
-    fun getDiscountAmount(order: Order): Price
+    fun getBenefitAmount(orderContext: OrderContext): Price
 }

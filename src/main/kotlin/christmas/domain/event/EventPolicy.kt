@@ -1,7 +1,9 @@
 package christmas.domain.event
 
-import christmas.domain.order.Order
+import christmas.domain.Price
+import christmas.domain.order.OrderContext
 
 interface EventPolicy {
-    fun isEligibleFor(order: Order): Boolean
+    fun isEligibleFor(orderContext: OrderContext): Boolean
+    fun getBenefitAmount(orderContext: OrderContext): Price
 }

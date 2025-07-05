@@ -1,6 +1,6 @@
 package christmas.domain.event.discount
 
-import christmas.domain.order.Order
+import christmas.domain.order.OrderContext
 import java.time.LocalDate
 
 
@@ -9,7 +9,7 @@ object DecemberDiscountBasePolicy {
     private val END_DATE = LocalDate.of(2023, 12, 31)
     private const val MIN_PRICE_FOR_EVENT = 10_000
 
-    fun isEligibleForDiscount(order: Order) =
-        order.placedDate in START_DATE..END_DATE
-                && order.totalPlacedPrice.value >= MIN_PRICE_FOR_EVENT
+    fun isEligibleForDiscount(orderContext: OrderContext) =
+        orderContext.placedDate in START_DATE..END_DATE
+                && orderContext.totalPrice.value >= MIN_PRICE_FOR_EVENT
 }
