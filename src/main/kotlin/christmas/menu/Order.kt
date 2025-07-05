@@ -41,6 +41,9 @@ class Order(
         private const val MAX_TOTAL_MENU_COUNT = 20
 
         fun of(menuNameAndCount: List<Pair<String, Int>>, date: LocalDate): Order {
+            require(menuNameAndCount.isNotEmpty()) {
+                "Menu must not be empty."
+            }
             require(menuNameAndCount.size == menuNameAndCount.map { it.first }.toSet().size) {
                 "Menu must be unique."
             }

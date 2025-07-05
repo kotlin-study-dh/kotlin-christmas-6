@@ -9,6 +9,17 @@ class OrderTest {
     private val defaultDate: LocalDate = LocalDate.of(2023, 12, 25)
 
     @Test
+    fun `fails to create Order when Menus are empty`() {
+        // given
+        val menuAndCount = emptyList<Pair<String, Int>>()
+
+        // when & then
+        assertThatThrownBy { Order.of(menuAndCount, defaultDate) }
+            .isExactlyInstanceOf(IllegalArgumentException::class.java)
+            .hasMessageContaining("Menu must not be empty.")
+    }
+
+    @Test
     fun `fails to create Order when Menus are not unique`() {
         // given
         val menuAndCount = listOf(
