@@ -1,4 +1,4 @@
-package christmas.domain.event.discount
+package christmas.domain.event
 
 import christmas.domain.order.OrderContext
 import java.time.LocalDate

@@ -8,7 +8,7 @@ import java.time.LocalDate
 object InputView {
     fun readOrder(): Order {
         println("Hello! This is the December Event Planner for the Woowa Restaurant.")
-        return Order.of(readVisitDate(), readMenu())
+        return readMenu(readVisitDate())
     }
 
     private fun readVisitDate(): LocalDate {
@@ -20,13 +20,13 @@ object InputView {
         }
     }
 
-    private fun readMenu(): Map<Menu, Int> {
-        println(
-            "Please tell us the menu items you’d like to order and their quantities.\n" +
-                    "(e.g. Seafood Pasta-2,Red Wine-1,Chocolate Cake-1)"
-        )
-        retry {
-            return Console.readLine().split(",")
+    private fun readMenu(placedDate: LocalDate): Order {
+        val orderItems = retry {
+            println(
+                "Please tell us the menu items you’d like to order and their quantities.\n" +
+                        "(e.g. Seafood Pasta-2,Red Wine-1,Chocolate Cake-1)"
+            )
+            Console.readLine().split(",")
                 .associate { it ->
                     val split = it.split("-")
                     val menu = Menu.from(split[0])
@@ -35,6 +35,7 @@ object InputView {
                     menu to quantity
                 }
         }
+        return Order.of(placedDate, orderItems)
     }
 
     inline fun <T> retry(

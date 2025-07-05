@@ -1,10 +1,12 @@
 package christmas.domain.event
 
+import christmas.domain.Menu
 import christmas.domain.Price
 import christmas.domain.order.OrderContext
 
 
-object ChampagneGiftEventPolicy: EventPolicy {
+object ChampagneGiftEventPolicy: GiftPolicy {
+    override val name = "Champagne Gift Event"
     private const val MIN_TOTAL_PRICE_FOR_GIFT = 120_000
 
     override fun isEligibleFor(orderContext: OrderContext): Boolean
@@ -14,10 +16,10 @@ object ChampagneGiftEventPolicy: EventPolicy {
         return Price.from(25_000)
     }
 
-    fun getGiftFor(orderContext: OrderContext): Pair<String, Int> {
+    override fun getGiftFor(orderContext: OrderContext): Pair<Menu, Int> {
         require(isEligibleFor(orderContext)) {
             "This order is not eligible for this event."
         }
-        return "champagne" to 1
+        return Menu.CHAMPAGNE to 1
     }
 }

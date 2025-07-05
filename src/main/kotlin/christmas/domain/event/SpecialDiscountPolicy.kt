@@ -1,10 +1,11 @@
-package christmas.domain.event.discount
+package christmas.domain.event
 
 import christmas.domain.Price
 import christmas.domain.order.OrderContext
 import java.time.LocalDate
 
 object SpecialDiscountPolicy: DiscountPolicy {
+    override val name = "Special Discount"
     private val specialDays = setOf(
         LocalDate.of(2023, 12, 3),
         LocalDate.of(2023, 12, 10),

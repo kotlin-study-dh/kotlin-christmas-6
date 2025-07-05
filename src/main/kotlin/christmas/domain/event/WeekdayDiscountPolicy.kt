@@ -1,18 +1,22 @@
-package christmas.domain.event.discount
+package christmas.domain.event
 
 import christmas.domain.MenuSection
 import christmas.domain.Price
 import christmas.domain.order.OrderContext
 import java.time.DayOfWeek
 
-object WeekendDiscountPolicy: DiscountPolicy {
+object WeekdayDiscountPolicy : DiscountPolicy {
+    override val name = "Weekday Discount"
     override fun isEligibleFor(orderContext: OrderContext): Boolean {
         if (!DecemberDiscountBasePolicy.isEligibleForDiscount(orderContext)) {
             return false
         }
         return orderContext.placedDate.dayOfWeek in setOf(
-            DayOfWeek.FRIDAY,
-            DayOfWeek.SATURDAY,
+            DayOfWeek.SUNDAY,
+            DayOfWeek.MONDAY,
+            DayOfWeek.TUESDAY,
+            DayOfWeek.WEDNESDAY,
+            DayOfWeek.THURSDAY,
         )
     }
 
@@ -20,11 +24,11 @@ object WeekendDiscountPolicy: DiscountPolicy {
         require(isEligibleFor(orderContext)) {
             "This order is not eligible for this discount policy."
         }
-        val mainCount = orderContext.orderItems.keys
-            .filter { menu -> menu.section == MenuSection.MAIN }
+        val dessertCount = orderContext.orderItems.keys
+            .filter { menu -> menu.section == MenuSection.DESSERT }
             .mapNotNull { menu -> orderContext.orderItems[menu] }
             .sum()
 
-        return Price.from(2_023) times mainCount
+        return Price.from(2_023) times dessertCount
     }
 }
