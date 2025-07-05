@@ -16,9 +16,11 @@ enum class Menu(
     ICE_CREAM("Ice Cream", Price.from(5_000), MenuSection.DESSERT),
     COKE_ZERO("Coke Zero", Price.from(3_000), MenuSection.BEVERAGE),
     RED_WINE("Red Wine", Price.from(60_000), MenuSection.BEVERAGE),
-    CHAMPAGNE("Champagne", Price.from(25_000), MenuSection.BEVERAGE),
+    CHAMPAGNE("Champagne", Price.from(25_000), MenuSection.BEVERAGE), ;
 
-
+    companion object {
+        fun from(displayName: String): Menu? = Menu.values().first { it.displayName == displayName }
+    }
 }
 
 enum class MenuSection {
