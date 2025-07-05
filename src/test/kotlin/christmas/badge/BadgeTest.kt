@@ -8,18 +8,20 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class BadgeTest {
     @Test
-    fun `fails to find the badge when total discount amount is less than the minimum threshold`() {
+    fun `fails to find the badge when total discount amount is less than zero`() {
         // given
-        val invalidTotalDiscountAmount = 4_999
+        val invalidTotalDiscountAmount = -1
 
         // when & then
         assertThatThrownBy { Badge.from(invalidTotalDiscountAmount) }
             .isExactlyInstanceOf(IllegalArgumentException::class.java)
-            .hasMessageContaining("Cannot find badge for total discount amount: $invalidTotalDiscountAmount")
+            .hasMessageContaining("Total discount amount must be greater than or equal to 0.")
     }
 
     @ParameterizedTest
     @CsvSource(
+        "0, NONE",
+        "4999, NONE",
         "5000, STAR",
         "5001, STAR",
         "9999, STAR",
