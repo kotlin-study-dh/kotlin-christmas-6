@@ -3,7 +3,6 @@ package christmas.event
 import christmas.menu.Menu
 import christmas.menu.Order
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
@@ -21,7 +20,7 @@ class WeekendDiscountEventTest {
         val order = Order(menuAndCount, weekend)
 
         // when
-        val discount = event.calculateDiscountAmount(order)
+        val discount = event.calculateBenefitAmount(order)
 
         // then
         assertThat(discount).isEqualTo(4_046)
@@ -36,7 +35,7 @@ class WeekendDiscountEventTest {
         val order = Order(menuAndCount, weekend)
 
         // when
-        val discount = event.calculateDiscountAmount(order)
+        val discount = event.calculateBenefitAmount(order)
 
         // then
         assertThat(discount).isEqualTo(0)
@@ -53,7 +52,7 @@ class WeekendDiscountEventTest {
         val order = Order(menuAndCount, weekday)
 
         // when
-        val discount = event.calculateDiscountAmount(order)
+        val discount = event.calculateBenefitAmount(order)
 
         // then
         assertThat(discount).isEqualTo(0)
@@ -69,7 +68,7 @@ class WeekendDiscountEventTest {
         val order = Order(menuAndCount, weekend)
 
         // when
-        val discount = event.calculateDiscountAmount(order)
+        val discount = event.calculateBenefitAmount(order)
 
         // then
         assertThat(discount).isEqualTo(0)
