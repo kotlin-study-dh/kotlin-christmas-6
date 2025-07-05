@@ -46,6 +46,11 @@ object OutputView {
 
     private fun printEventBenefits(order: Order) {
         println("<Event Benefits>")
+        if (order.appliedEventPolicies.isEmpty()) {
+            println("None")
+            println()
+            return
+        }
         order.appliedEventPolicies.forEach { eventPolicy ->
             val benefitAmount = eventPolicy.getBenefitAmount(OrderContext.from(order))
             println("${eventPolicy.name}: -$benefitAmount WON")
