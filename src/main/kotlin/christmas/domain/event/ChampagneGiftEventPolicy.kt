@@ -13,7 +13,7 @@ object ChampagneGiftEventPolicy: GiftPolicy {
      = orderContext.totalPrice.value >= MIN_TOTAL_PRICE_FOR_GIFT
 
     override fun getBenefitAmount(orderContext: OrderContext): Price {
-        return Price.from(25_000)
+        return Menu.CHAMPAGNE.price
     }
 
     override fun getGiftFor(orderContext: OrderContext): Pair<Menu, Int> {

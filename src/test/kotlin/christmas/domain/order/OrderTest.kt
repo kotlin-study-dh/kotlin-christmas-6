@@ -2,6 +2,7 @@ package christmas.domain.order
 
 import christmas.domain.Menu
 import christmas.domain.Price
+import christmas.domain.event.SpecialDiscountPolicy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -63,10 +64,7 @@ class OrderTest {
         // Given
         val orderItems = mapOf(Menu.T_BONE_STEAK to 1, Menu.CHOCOLATE_CAKE to 1)
         val appliedPolicies = listOf(
-            object : DiscountPolicy {
-                override fun isEligibleFor(orderContext: OrderContext): Boolean = true
-                override fun getBenefitAmount(context: OrderContext): Price = Price.from(1_000)
-            }
+            SpecialDiscountPolicy
         )
         val order = Order(LocalDate.of(2023, 12, 24), orderItems, appliedPolicies)
 

@@ -7,6 +7,8 @@ import java.time.DayOfWeek
 
 object WeekdayDiscountPolicy : DiscountPolicy {
     override val name = "Weekday Discount"
+    private const val DISCOUNT_AMOUNT_PER_MENU = 2_023
+
     override fun isEligibleFor(orderContext: OrderContext): Boolean {
         if (!DecemberDiscountBasePolicy.isEligibleForDiscount(orderContext)) {
             return false
@@ -29,6 +31,6 @@ object WeekdayDiscountPolicy : DiscountPolicy {
             .mapNotNull { menu -> orderContext.orderItems[menu] }
             .sum()
 
-        return Price.from(2_023) times dessertCount
+        return Price.from(DISCOUNT_AMOUNT_PER_MENU) times dessertCount
     }
 }
