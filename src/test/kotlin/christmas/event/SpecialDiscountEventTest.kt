@@ -13,12 +13,12 @@ class SpecialDiscountEventTest {
     @Test
     fun `calculates discount amount for a special day order`() {
         // given
-        val menuAndCount = mapOf(
+        val menuAndCounts = mapOf(
             Menu.TAPAS to 1,
             Menu.T_BONE_STAKE to 1,
             Menu.CHOCOLATE_CAKE to 1
         )
-        val order = Order(menuAndCount, specialDay)
+        val order = Order(menuAndCounts, specialDay)
 
         // when
         val discount = event.calculateBenefitAmount(order)
@@ -30,10 +30,10 @@ class SpecialDiscountEventTest {
     @Test
     fun `does not calculate discount amount when order amount is below minimum`() {
         // given
-        val menuAndCount = mapOf(
+        val menuAndCounts = mapOf(
             Menu.TAPAS to 1
         )
-        val order = Order(menuAndCount, specialDay)
+        val order = Order(menuAndCounts, specialDay)
 
         // when
         val discount = event.calculateBenefitAmount(order)
@@ -46,11 +46,11 @@ class SpecialDiscountEventTest {
     fun `does not calculate discount amount when order is not on a special day`() {
         // given
         val nonSpecialDay = LocalDate.of(2023, 12, 4)
-        val menuAndCount = mapOf(
+        val menuAndCounts = mapOf(
             Menu.TAPAS to 1,
             Menu.T_BONE_STAKE to 1
         )
-        val order = Order(menuAndCount, nonSpecialDay)
+        val order = Order(menuAndCounts, nonSpecialDay)
 
         // when
         val discount = event.calculateBenefitAmount(order)

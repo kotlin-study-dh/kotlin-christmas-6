@@ -13,12 +13,12 @@ class WeekdayDiscountEventTest {
     @Test
     fun `calculates discount amount for dessert menus in a weekday order`() {
         // given
-        val menuAndCount = mapOf(
+        val menuAndCounts = mapOf(
             Menu.TAPAS to 2,
             Menu.T_BONE_STAKE to 1,
             Menu.CHOCOLATE_CAKE to 3
         )
-        val order = Order(menuAndCount, weekday)
+        val order = Order(menuAndCounts, weekday)
 
         // when
         val discount = event.calculateBenefitAmount(order)
@@ -30,10 +30,10 @@ class WeekdayDiscountEventTest {
     @Test
     fun `does not calculate discount amount when order amount is below minimum`() {
         // given
-        val menuAndCount = mapOf(
+        val menuAndCounts = mapOf(
             Menu.TAPAS to 1,
         )
-        val order = Order(menuAndCount, weekday)
+        val order = Order(menuAndCounts, weekday)
 
         // when
         val discount = event.calculateBenefitAmount(order)
@@ -46,11 +46,11 @@ class WeekdayDiscountEventTest {
     fun `does not calculate discount amount when order is on a weekend`() {
         // given
         val weekend = LocalDate.of(2023, 12, 2)
-        val menuAndCount = mapOf(
+        val menuAndCounts = mapOf(
             Menu.T_BONE_STAKE to 1,
             Menu.CHOCOLATE_CAKE to 3
         )
-        val order = Order(menuAndCount, weekend)
+        val order = Order(menuAndCounts, weekend)
 
         // when
         val discount = event.calculateBenefitAmount(order)
@@ -62,11 +62,11 @@ class WeekdayDiscountEventTest {
     @Test
     fun `does not calculate discount amount when there are no dessert menus`() {
         // given
-        val menuAndCount = mapOf(
+        val menuAndCounts = mapOf(
             Menu.TAPAS to 2,
             Menu.T_BONE_STAKE to 1
         )
-        val order = Order(menuAndCount, weekday)
+        val order = Order(menuAndCounts, weekday)
 
         // when
         val discount = event.calculateBenefitAmount(order)

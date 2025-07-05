@@ -13,12 +13,12 @@ class GiveawayEventTest {
     @Test
     fun `calculates giveaway amount for orders above minimum amount`() {
         // given
-        val menuAndCount = mapOf(
+        val menuAndCounts = mapOf(
             Menu.T_BONE_STAKE to 2,
             Menu.BARBECUE_RIBS to 1,
             Menu.CHOCOLATE_CAKE to 2
         )
-        val order = Order(menuAndCount, defaultDate)
+        val order = Order(menuAndCounts, defaultDate)
 
         // when
         val giveawayAmount = GiveawayEvent.calculateBenefitAmount(order)
@@ -30,12 +30,12 @@ class GiveawayEventTest {
     @Test
     fun `does not calculate giveaway amount when order amount is below minimum`() {
         // given
-        val menuAndCount = mapOf(
+        val menuAndCounts = mapOf(
             Menu.CHRISTMAS_PASTA to 4,
             Menu.CHOCOLATE_CAKE to 1,
             Menu.ZERO_COKE to 1
         )
-        val order = Order(menuAndCount, defaultDate)
+        val order = Order(menuAndCounts, defaultDate)
 
         // when
         val giveawayAmount = GiveawayEvent.calculateBenefitAmount(order)

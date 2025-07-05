@@ -7,7 +7,7 @@ import christmas.util.isWeekend
 import java.time.LocalDate
 
 class Order(
-    val menuAndCount: Map<Menu, Int>,
+    val menuAndCounts: Map<Menu, Int>,
     val date: LocalDate,
 ) {
     val isWeekday: Boolean
@@ -15,23 +15,23 @@ class Order(
     val isWeekend: Boolean
         get() = date.isWeekend()
     val totalOrderAmount: Int
-        get() = menuAndCount.map { (it.key.price * it.value) }
+        get() = menuAndCounts.map { (it.key.price * it.value) }
             .sum()
 
     init {
-        require(menuAndCount.size != menuAndCount.keys.filter { menu -> menu.isCategory(DRINK) }.size) {
+        require(menuAndCounts.size != menuAndCounts.keys.filter { menu -> menu.isCategory(DRINK) }.size) {
             "Cannot order drinks only."
         }
-        require(menuAndCount.values.all { count -> count >= MIN_MENU_COUNT }) {
+        require(menuAndCounts.values.all { count -> count >= MIN_MENU_COUNT }) {
             "Each menu count must be greater than or equal to $MIN_MENU_COUNT."
         }
-        require(menuAndCount.values.sum() <= MAX_TOTAL_MENU_COUNT) {
+        require(menuAndCounts.values.sum() <= MAX_TOTAL_MENU_COUNT) {
             "Total menu count must not exceed $MAX_TOTAL_MENU_COUNT."
         }
     }
 
     fun sumMenuCountsOf(category: Category) =
-        menuAndCount.filter { it.key.isCategory(category) }
+        menuAndCounts.filter { it.key.isCategory(category) }
             .values.sum()
 
     fun isDayIn(days: Set<Int>) = date.isDayIn(days)
@@ -40,17 +40,17 @@ class Order(
         private const val MIN_MENU_COUNT = 1
         private const val MAX_TOTAL_MENU_COUNT = 20
 
-        fun of(menuNameAndCount: List<Pair<String, Int>>, date: LocalDate): Order {
-            require(menuNameAndCount.isNotEmpty()) {
+        fun of(menuNameAndCounts: List<Pair<String, Int>>, date: LocalDate): Order {
+            require(menuNameAndCounts.isNotEmpty()) {
                 "Menu must not be empty."
             }
-            require(menuNameAndCount.size == menuNameAndCount.map { it.first }.toSet().size) {
+            require(menuNameAndCounts.size == menuNameAndCounts.map { it.first }.toSet().size) {
                 "Menu must be unique."
             }
-            val menuAndCount = menuNameAndCount.associate { (korName, count) ->
+            val menuAndCounts = menuNameAndCounts.associate { (korName, count) ->
                 Menu.from(korName) to count
             }
-            return Order(menuAndCount, date)
+            return Order(menuAndCounts, date)
         }
     }
 }
