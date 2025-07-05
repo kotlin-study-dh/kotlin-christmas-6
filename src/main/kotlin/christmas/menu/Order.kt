@@ -2,6 +2,7 @@ package christmas.menu
 
 import christmas.menu.Category.DRINK
 import christmas.util.isWeekDay
+import christmas.util.isWeekend
 import java.time.LocalDate
 
 class Order(
@@ -10,6 +11,8 @@ class Order(
 ) {
     val isWeekday: Boolean
         get() = date.isWeekDay()
+    val isWeekend: Boolean
+        get() = date.isWeekend()
     val totalOrderAmount: Int
         get() = menuAndCount.map { (it.key.price * it.value) }
             .sum()
