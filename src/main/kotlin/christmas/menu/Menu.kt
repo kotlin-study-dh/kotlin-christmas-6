@@ -6,7 +6,7 @@ import christmas.menu.Category.DRINK
 import christmas.menu.Category.MAIN_COURSE
 
 enum class Menu(
-    val category: Category,
+    private val category: Category,
     val korName: String,
     val price: Int,
 ) {
