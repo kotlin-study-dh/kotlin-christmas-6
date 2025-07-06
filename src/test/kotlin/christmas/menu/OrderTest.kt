@@ -24,7 +24,7 @@ class OrderTest {
         // given
         val menuNameAndCounts = listOf(
             "타파스" to 1,
-            "티본 스테이크" to 2,
+            "티본스테이크" to 2,
             "타파스" to 3 // Duplicate menu
         )
 
@@ -38,8 +38,8 @@ class OrderTest {
     fun `fails to create Order when only drinks are ordered`() {
         // given
         val menuNameAndCounts = listOf(
-            "제로 콜라" to 2,
-            "레드 와인" to 1
+            "제로콜라" to 2,
+            "레드와인" to 1
         )
 
         // when & then
@@ -53,7 +53,7 @@ class OrderTest {
         // given
         val menuNameAndCounts = listOf(
             "타파스" to 0, // Invalid count
-            "티본 스테이크" to 1
+            "티본스테이크" to 1
         )
 
         // when & then
@@ -67,7 +67,7 @@ class OrderTest {
         // given
         val menuNameAndCounts = listOf(
             "타파스" to 10,
-            "티본 스테이크" to 11 // Total count exceeds 20
+            "티본스테이크" to 11 // Total count exceeds 20
         )
 
         // when & then
@@ -80,9 +80,9 @@ class OrderTest {
     fun `sums menu counts of a specific category`() {
         // given
         val menuNameAndCounts = listOf(
-            "초콜릿 케이크" to 2,
+            "초코케이크" to 2,
             "아이스크림" to 1,
-            "제로 콜라" to 3
+            "제로콜라" to 3
         )
         val order = Order.of(menuNameAndCounts, defaultDate)
 
