@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource
 
 class BadgeTest {
     @Test
-    fun `fails to find the badge when total discount amount is less than zero`() {
+    fun `fails to find the badge when total benefit amount is less than zero`() {
         // given
         val invalidTotalBenefitAmount = -1
 
@@ -31,7 +31,7 @@ class BadgeTest {
         "20000, SANTA",
         "20001, SANTA",
     )
-    fun `succeeds to find the badge based on total discount amount`(totalBenefitAmount: Int, expectedBadge: Badge) {
+    fun `succeeds to find the badge based on total benefit amount`(totalBenefitAmount: Int, expectedBadge: Badge) {
         // when
         val badge = Badge.from(totalBenefitAmount)
 
