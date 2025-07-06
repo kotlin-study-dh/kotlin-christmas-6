@@ -5,7 +5,7 @@ import christmas.menu.Order
 
 object GiveawayEvent : AbstractChristmasEvent() {
     private const val MIN_ORDER_AMOUNT = 120_000
-    private val giveawayMenus = mapOf(
+    val giveawayMenus = mapOf(
         Menu.CHAMPAGNE to 1,
     )
 
