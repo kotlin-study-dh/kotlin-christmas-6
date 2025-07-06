@@ -5,9 +5,14 @@ import christmas.menu.Order
 
 object GiveawayEvent : AbstractChristmasEvent() {
     private const val MIN_ORDER_AMOUNT = 120_000
-    private val giveawayMenu = Menu.CHAMPAGNE
+    private val giveawayMenus = mapOf(
+        Menu.CHAMPAGNE to 1,
+    )
 
     override fun isApplicable(order: Order) = order.totalOrderAmount >= MIN_ORDER_AMOUNT
 
-    override fun calculateInternal(order: Order) = giveawayMenu.price
+    override fun calculateInternal(order: Order) =
+        giveawayMenus.map { (menu, count) ->
+            menu.price * count
+        }.sum()
 }

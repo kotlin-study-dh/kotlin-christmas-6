@@ -24,7 +24,7 @@ class GiveawayEventTest {
         val giveawayAmount = GiveawayEvent.calculateBenefitAmount(order)
 
         // then
-        assertThat(giveawayAmount).isEqualTo(Menu.CHAMPAGNE.price)
+        assertThat(giveawayAmount).isEqualTo(25_000)
     }
 
     @Test
