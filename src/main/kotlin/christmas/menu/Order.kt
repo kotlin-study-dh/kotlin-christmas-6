@@ -6,33 +6,35 @@ import christmas.util.isWeekend
 import java.time.LocalDate
 
 class Order(
-    val menuAndCounts: Map<Menu, Int>,
+    private val _menuAndCounts: Map<Menu, Int>,
     private val date: LocalDate,
 ) {
+    val menuAndCounts: Map<Menu, Int>
+        get() = _menuAndCounts.toMap()
+    val totalOrderAmount: Int
+        get() = _menuAndCounts.map { (it.key.price * it.value) }
+            .sum()
     val day: Int
         get() = date.dayOfMonth
     val isWeekday: Boolean
         get() = date.isWeekDay()
     val isWeekend: Boolean
         get() = date.isWeekend()
-    val totalOrderAmount: Int
-        get() = menuAndCounts.map { (it.key.price * it.value) }
-            .sum()
 
     init {
-        require(menuAndCounts.size != menuAndCounts.keys.filter { menu -> menu.isCategory(DRINK) }.size) {
+        require(_menuAndCounts.size != _menuAndCounts.keys.filter { menu -> menu.isCategory(DRINK) }.size) {
             "Cannot order drinks only."
         }
-        require(menuAndCounts.values.all { count -> count >= MIN_MENU_COUNT }) {
+        require(_menuAndCounts.values.all { count -> count >= MIN_MENU_COUNT }) {
             "Each menu count must be greater than or equal to $MIN_MENU_COUNT."
         }
-        require(menuAndCounts.values.sum() <= MAX_TOTAL_MENU_COUNT) {
+        require(_menuAndCounts.values.sum() <= MAX_TOTAL_MENU_COUNT) {
             "Total menu count must not exceed $MAX_TOTAL_MENU_COUNT."
         }
     }
 
     fun sumMenuCountsOf(category: Category) =
-        menuAndCounts.filter { it.key.isCategory(category) }
+        _menuAndCounts.filter { it.key.isCategory(category) }
             .values.sum()
 
     fun isDayMatched(predicate: (Int) -> Boolean) =
