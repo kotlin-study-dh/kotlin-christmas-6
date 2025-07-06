@@ -20,10 +20,10 @@ class WeekendDiscountEventTest {
         val order = Order(menuAndCounts, weekend)
 
         // when
-        val discount = event.calculateBenefitAmount(order)
+        val benefitAmount = event.calculateBenefitAmount(order)
 
         // then
-        assertThat(discount).isEqualTo(4_046)
+        assertThat(benefitAmount).isEqualTo(4_046)
     }
 
     @Test
@@ -35,10 +35,10 @@ class WeekendDiscountEventTest {
         val order = Order(menuAndCounts, weekend)
 
         // when
-        val discount = event.calculateBenefitAmount(order)
+        val benefitAmount = event.calculateBenefitAmount(order)
 
         // then
-        assertThat(discount).isEqualTo(0)
+        assertThat(benefitAmount).isEqualTo(0)
     }
 
     @Test
@@ -52,10 +52,10 @@ class WeekendDiscountEventTest {
         val order = Order(menuAndCounts, weekday)
 
         // when
-        val discount = event.calculateBenefitAmount(order)
+        val benefitAmount = event.calculateBenefitAmount(order)
 
         // then
-        assertThat(discount).isEqualTo(0)
+        assertThat(benefitAmount).isEqualTo(0)
     }
 
     @Test
@@ -68,9 +68,9 @@ class WeekendDiscountEventTest {
         val order = Order(menuAndCounts, weekend)
 
         // when
-        val discount = event.calculateBenefitAmount(order)
+        val benefitAmount = event.calculateBenefitAmount(order)
 
         // then
-        assertThat(discount).isEqualTo(0)
+        assertThat(benefitAmount).isEqualTo(0)
     }
 }

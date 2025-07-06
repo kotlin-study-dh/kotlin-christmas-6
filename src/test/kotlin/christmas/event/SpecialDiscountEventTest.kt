@@ -21,10 +21,10 @@ class SpecialDiscountEventTest {
         val order = Order(menuAndCounts, specialDay)
 
         // when
-        val discount = event.calculateBenefitAmount(order)
+        val benefitAmount = event.calculateBenefitAmount(order)
 
         // then
-        assertThat(discount).isEqualTo(1_000)
+        assertThat(benefitAmount).isEqualTo(1_000)
     }
 
     @Test
@@ -36,10 +36,10 @@ class SpecialDiscountEventTest {
         val order = Order(menuAndCounts, specialDay)
 
         // when
-        val discount = event.calculateBenefitAmount(order)
+        val benefitAmount = event.calculateBenefitAmount(order)
 
         // then
-        assertThat(discount).isEqualTo(0)
+        assertThat(benefitAmount).isEqualTo(0)
     }
 
     @Test
@@ -53,9 +53,9 @@ class SpecialDiscountEventTest {
         val order = Order(menuAndCounts, nonSpecialDay)
 
         // when
-        val discount = event.calculateBenefitAmount(order)
+        val benefitAmount = event.calculateBenefitAmount(order)
 
         // then
-        assertThat(discount).isEqualTo(0)
+        assertThat(benefitAmount).isEqualTo(0)
     }
 }
