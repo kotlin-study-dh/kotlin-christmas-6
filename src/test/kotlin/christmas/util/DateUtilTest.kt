@@ -46,24 +46,4 @@ class DateUtilTest {
         // when & then
         assertThat(localDate.isWeekend()).isFalse()
     }
-
-    @Test
-    fun `isDayIn() returns true for a day in the set`() {
-        // given
-        val localDate = LocalDate.of(2025, 7, 6)
-        val days = setOf(6, 7, 8)
-
-        // when & then
-        assertThat(localDate.isDayIn(days)).isTrue()
-    }
-
-    @Test
-    fun `isDayIn() returns false for a day not in the set`() {
-        // given
-        val localDate = LocalDate.of(2025, 7, 6)
-        val days = setOf(1, 2, 3)
-
-        // when & then
-        assertThat(localDate.isDayIn(days)).isFalse()
-    }
 }

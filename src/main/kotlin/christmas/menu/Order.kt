@@ -1,15 +1,16 @@
 package christmas.menu
 
 import christmas.menu.Category.DRINK
-import christmas.util.isDayIn
 import christmas.util.isWeekDay
 import christmas.util.isWeekend
 import java.time.LocalDate
 
 class Order(
     val menuAndCounts: Map<Menu, Int>,
-    val date: LocalDate,
+    private val date: LocalDate,
 ) {
+    val day: Int
+        get() = date.dayOfMonth
     val isWeekday: Boolean
         get() = date.isWeekDay()
     val isWeekend: Boolean
@@ -34,7 +35,8 @@ class Order(
         menuAndCounts.filter { it.key.isCategory(category) }
             .values.sum()
 
-    fun isDayIn(days: Set<Int>) = date.isDayIn(days)
+    fun isDayMatched(predicate: (Int) -> Boolean) =
+        predicate(date.dayOfMonth)
 
     companion object {
         private const val MIN_MENU_COUNT = 1

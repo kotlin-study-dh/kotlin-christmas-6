@@ -12,7 +12,3 @@ fun LocalDate.isWeekend(): Boolean {
     val dayOfWeek = this.dayOfWeek
     return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY
 }
-
-fun LocalDate.isDayIn(days: Set<Int>): Boolean {
-    return this.dayOfMonth in days
-}
