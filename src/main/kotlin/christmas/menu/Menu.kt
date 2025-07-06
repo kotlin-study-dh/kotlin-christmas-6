@@ -27,9 +27,8 @@ enum class Menu(
     fun isCategory(category: Category) = this.category == category
 
     companion object {
-        fun from(korName: String): Menu {
-            return entries.find { it.korName == korName }
+        fun from(korName: String) =
+            entries.find { it.korName == korName }
                 ?: throw IllegalArgumentException("Cannot find menu for korName: $korName")
-        }
     }
 }

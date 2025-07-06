@@ -37,8 +37,7 @@ class Order(
         _menuAndCounts.filter { it.key.isCategory(category) }
             .values.sum()
 
-    fun isDayMatched(predicate: (Int) -> Boolean) =
-        predicate(date.dayOfMonth)
+    fun isDayMatched(predicate: (Int) -> Boolean) = predicate(date.dayOfMonth)
 
     companion object {
         private const val MIN_MENU_COUNT = 1
