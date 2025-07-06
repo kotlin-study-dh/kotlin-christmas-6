@@ -47,9 +47,9 @@ class ChristmasEventController {
         val visitDate = retryOnFailure {
             val visitDay = InputView.readVisitDay()
             runCatching {
-                LocalDate.of(2023, 12, visitDay)
+                LocalDate.of(DEFAULT_YEAR, DEFAULT_MONTH, visitDay)
             }.getOrElse {
-                throw IllegalArgumentException("2023-12-$visitDay is not a valid date.")
+                throw IllegalArgumentException("$DEFAULT_YEAR-$DEFAULT_MONTH-$visitDay is not a valid date.")
             }
         }
         return retryOnFailure {
@@ -66,4 +66,9 @@ class ChristmasEventController {
                     retryOnFailure(block)
                 }
             }.getOrThrow()
+
+    companion object {
+        private const val DEFAULT_YEAR = 2023
+        private const val DEFAULT_MONTH = 12
+    }
 }
