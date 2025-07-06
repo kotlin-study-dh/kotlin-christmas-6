@@ -40,20 +40,22 @@ object OutputView {
 
     fun printBenefitSummary(benefitAmounts: Map<EventSignature, Int>) {
         println(System.lineSeparator() + "<혜택 내역>")
-        if (benefitAmounts.isEmpty()) {
-            println(NO_BENEFIT_MESSAGE)
-            printTotalBenefitAmount(benefitAmounts)
-            return
-        }
-        benefitAmounts.forEach { (eventSignature, amount) ->
-            when (eventSignature) {
-                EventSignature.WEEKDAY_DISCOUNT -> println("평일 할인: -${numberFormatter.format(amount)}원")
-                EventSignature.WEEKEND_DISCOUNT -> println("주말 할인: -${numberFormatter.format(amount)}원")
-                EventSignature.SPECIAL_DISCOUNT -> println("특별 할인: -${numberFormatter.format(amount)}원")
-                EventSignature.D_DAY_DISCOUNT -> println("크리스마스 디데이 할인: -${numberFormatter.format(amount)}원")
-                EventSignature.GIVEAWAY -> println("증정 이벤트: -${numberFormatter.format(amount)}원")
+        benefitAmounts.filter { it.value > 0 }
+            .also { filteredBenefits ->
+                if (filteredBenefits.isEmpty()) {
+                    println(NO_BENEFIT_MESSAGE)
+                    printTotalBenefitAmount(filteredBenefits)
+                    return
+                }
+            }.forEach { (eventSignature, amount) ->
+                when (eventSignature) {
+                    EventSignature.WEEKDAY_DISCOUNT -> println("평일 할인: -${numberFormatter.format(amount)}원")
+                    EventSignature.WEEKEND_DISCOUNT -> println("주말 할인: -${numberFormatter.format(amount)}원")
+                    EventSignature.SPECIAL_DISCOUNT -> println("특별 할인: -${numberFormatter.format(amount)}원")
+                    EventSignature.D_DAY_DISCOUNT -> println("크리스마스 디데이 할인: -${numberFormatter.format(amount)}원")
+                    EventSignature.GIVEAWAY -> println("증정 이벤트: -${numberFormatter.format(amount)}원")
+                }
             }
-        }
         printTotalBenefitAmount(benefitAmounts)
     }
 
@@ -86,7 +88,7 @@ object OutputView {
         }
     }
 
-    fun printErrorMessage(message: String) {
-        println("$ERROR_MESSAGE_PREFIX$message")
+    fun printErrorMessage(message: String?) {
+        println("$ERROR_MESSAGE_PREFIX${message ?: "An unknown error occurred"}")
     }
 }
