@@ -92,4 +92,22 @@ class OrderTest {
         // then
         assertThat(dessertCount).isEqualTo(3)
     }
+
+    @Test
+    fun `calculates total order amount correctly`() {
+        // given
+        val menuNameAndCounts = listOf(
+            "티본스테이크" to 1,
+            "바비큐립" to 1,
+            "초코케이크" to 2,
+            "제로콜라" to 1
+        )
+        val order = Order.of(menuNameAndCounts, defaultDate)
+
+        // when
+        val totalAmount = order.totalOrderAmount
+
+        // then
+        assertThat(totalAmount).isEqualTo(142_000)
+    }
 }
