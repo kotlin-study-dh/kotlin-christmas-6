@@ -10,12 +10,12 @@ class BadgeTest {
     @Test
     fun `fails to find the badge when total discount amount is less than zero`() {
         // given
-        val invalidTotalDiscountAmount = -1
+        val invalidTotalBenefitAmount = -1
 
         // when & then
-        assertThatThrownBy { Badge.from(invalidTotalDiscountAmount) }
+        assertThatThrownBy { Badge.from(invalidTotalBenefitAmount) }
             .isExactlyInstanceOf(IllegalArgumentException::class.java)
-            .hasMessageContaining("Total discount amount must be greater than or equal to 0.")
+            .hasMessageContaining("Total Benefit amount must be greater than or equal to 0.")
     }
 
     @ParameterizedTest
@@ -31,9 +31,9 @@ class BadgeTest {
         "20000, SANTA",
         "20001, SANTA",
     )
-    fun `succeeds to find the badge based on total discount amount`(totalDiscountAmount: Int, expectedBadge: Badge) {
+    fun `succeeds to find the badge based on total discount amount`(totalBenefitAmount: Int, expectedBadge: Badge) {
         // when
-        val badge = Badge.from(totalDiscountAmount)
+        val badge = Badge.from(totalBenefitAmount)
 
         // then
         assertThat(badge).isEqualTo(expectedBadge)
