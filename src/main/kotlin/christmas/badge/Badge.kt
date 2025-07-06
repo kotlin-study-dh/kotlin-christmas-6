@@ -1,13 +1,12 @@
 package christmas.badge
 
 enum class Badge(
-    val korName: String,
     val totalDiscountAmountThreshold: Int,
 ) {
-    NONE("없음", 0),
-    STAR("별", 5_000),
-    TREE("트리", 10_000),
-    SANTA("산타", 20_000),
+    NONE(0),
+    STAR(5_000),
+    TREE(10_000),
+    SANTA(20_000),
     ;
 
     companion object {
