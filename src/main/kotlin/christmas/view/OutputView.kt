@@ -44,17 +44,17 @@ object OutputView {
             .also { filteredBenefits ->
                 if (filteredBenefits.isEmpty()) {
                     println(NO_BENEFIT_MESSAGE)
-                    printTotalBenefitAmount(filteredBenefits)
-                    return
                 }
-            }.forEach { (eventSignature, amount) ->
-                when (eventSignature) {
-                    EventSignature.WEEKDAY_DISCOUNT -> println("평일 할인: -${numberFormatter.format(amount)}원")
-                    EventSignature.WEEKEND_DISCOUNT -> println("주말 할인: -${numberFormatter.format(amount)}원")
-                    EventSignature.SPECIAL_DISCOUNT -> println("특별 할인: -${numberFormatter.format(amount)}원")
-                    EventSignature.D_DAY_DISCOUNT -> println("크리스마스 디데이 할인: -${numberFormatter.format(amount)}원")
-                    EventSignature.GIVEAWAY -> println("증정 이벤트: -${numberFormatter.format(amount)}원")
+            }
+            .forEach { (eventSignature, amount) ->
+                val eventSignatureName = when (eventSignature) {
+                    EventSignature.WEEKDAY_DISCOUNT -> "평일 할인"
+                    EventSignature.WEEKEND_DISCOUNT -> "주말 할인"
+                    EventSignature.SPECIAL_DISCOUNT -> "특별 할인"
+                    EventSignature.D_DAY_DISCOUNT -> "크리스마스 디데이 할인"
+                    EventSignature.GIVEAWAY -> "증정 이벤트"
                 }
+                println("$eventSignatureName: -${numberFormatter.format(amount)}원")
             }
         printTotalBenefitAmount(benefitAmounts)
     }
