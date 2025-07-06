@@ -21,7 +21,7 @@ class GiveawayEventTest {
         val order = Order(menuAndCounts, defaultDate)
 
         // when
-        val giveawayAmount = GiveawayEvent.calculateBenefitAmount(order)
+        val giveawayAmount = event.calculateBenefitAmount(order)
 
         // then
         assertThat(giveawayAmount).isEqualTo(25_000)
@@ -38,7 +38,7 @@ class GiveawayEventTest {
         val order = Order(menuAndCounts, defaultDate)
 
         // when
-        val giveawayAmount = GiveawayEvent.calculateBenefitAmount(order)
+        val giveawayAmount = event.calculateBenefitAmount(order)
 
         // then
         assertThat(giveawayAmount).isEqualTo(0)
