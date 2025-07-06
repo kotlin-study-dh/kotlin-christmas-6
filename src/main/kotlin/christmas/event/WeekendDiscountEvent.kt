@@ -10,4 +10,6 @@ object WeekendDiscountEvent : AbstractChristmasEvent() {
     override fun isApplicable(order: Order) = order.isWeekend
 
     override fun calculateInternal(order: Order) = order.sumMenuCountsOf(discountCategory) * DISCOUNT_AMOUNT_PER_MENU
+
+    override fun signature() = EventSignature.WEEKEND_DISCOUNT
 }

@@ -9,4 +9,6 @@ object SpecialDiscountEvent : AbstractChristmasEvent() {
     override fun isApplicable(order: Order) = order.isDayMatched(specialDays::contains)
 
     override fun calculateInternal(order: Order) = DISCOUNT_AMOUNT
+
+    override fun signature() = EventSignature.SPECIAL_DISCOUNT
 }

@@ -15,4 +15,6 @@ object GiveawayEvent : AbstractChristmasEvent() {
         giveawayMenus.map { (menu, count) ->
             menu.price * count
         }.sum()
+
+    override fun signature() = EventSignature.GIVEAWAY
 }
