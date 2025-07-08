@@ -19,6 +19,9 @@ class Order(
     fun countMenuByCategory(category: MenuCategory) =
         menus.filter { it.key.category == category }.values.sum()
 
+    val totalPrice: Int
+        get() = menus.entries.sumOf { (menu, count) -> menu.price * count }
+
     companion object {
         private const val DECEMBER_START_DATE = 1
         private const val DECEMBER_END_DATE = 31
