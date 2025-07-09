@@ -1,5 +1,8 @@
 package christmas
 
+import christmas.domain.view.InputView
+
 fun main() {
-    TODO("프로그램 구현")
+    val visitDate = InputView.readVisitDate()
+    val orders = InputView.readProductsToOrder()
 }
