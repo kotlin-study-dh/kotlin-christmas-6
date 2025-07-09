@@ -8,6 +8,12 @@ class Order(
     private val orderDate: Date
 ) {
 
+    init {
+        require(menus.values.sumOf { it } <= 20) {
+            "you can order $MAX_ORDER_MENU_AMOUNT menus at one time"
+        }
+    }
+
     constructor(menus: Map<Menu, Int>, orderDate: Int) : this(menus, Date(orderDate))
 
     fun getDayOfWeek(): DayOfWeek {
@@ -28,6 +34,7 @@ class Order(
         get() = orderDate.date
 
     companion object {
+        private const val MAX_ORDER_MENU_AMOUNT = 20
         private const val DECEMBER_START_DATE = 1
         private const val DECEMBER_END_DATE = 31
         private const val EVENT_YEAR = 2023
