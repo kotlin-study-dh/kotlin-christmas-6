@@ -5,8 +5,10 @@ import java.time.LocalDate
 
 class Order(
     val menus: Map<Menu, Int>,
-    val date: Int
+    private val orderDate: Date
 ) {
+
+    constructor(menus: Map<Menu, Int>, orderDate: Int) : this(menus, Date(orderDate))
 
     fun getDayOfWeek(): DayOfWeek {
         require(date in DECEMBER_START_DATE..DECEMBER_END_DATE) {
@@ -21,6 +23,9 @@ class Order(
 
     val totalPrice: Int
         get() = menus.entries.sumOf { (menu, count) -> menu.price * count }
+
+    val date: Int
+        get() = orderDate.date
 
     companion object {
         private const val DECEMBER_START_DATE = 1
