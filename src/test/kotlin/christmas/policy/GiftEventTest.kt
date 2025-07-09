@@ -3,10 +3,7 @@ package christmas.policy
 import christmas.domain.Menu
 import christmas.domain.Order
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
 
 class GiftEventTest {
 
@@ -14,7 +11,7 @@ class GiftEventTest {
     fun `determine gift amount - over than standard`() {
         val order = Order(
             mapOf(
-                Menu.BARBECUE_RIBS to 100
+                Menu.BARBECUE_RIBS to 10
             ), 1
         )
         assertThat(GiftEvent.calculateDiscount(order)).isEqualTo(25000)

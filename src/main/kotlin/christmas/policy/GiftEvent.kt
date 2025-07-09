@@ -9,4 +9,6 @@ object GiftEvent: DiscountPolicy {
 
     override fun calculateDiscount(order: Order) =
         if (order.totalPrice >= CHAMPAGNE_GIFT_STANDARD) Menu.CHAMPAGNE.price else 0
+
+    fun isEligible(order: Order) = order.totalPrice >= CHAMPAGNE_GIFT_STANDARD
 }
