@@ -3,7 +3,6 @@ package christmas.policy
 import christmas.domain.Menu
 import christmas.domain.Order
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class WeeklyDiscountTest {

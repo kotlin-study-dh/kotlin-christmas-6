@@ -3,7 +3,7 @@ package christmas.policy
 import christmas.domain.Menu
 import christmas.domain.Order
 
-object GiftEvent: DiscountPolicy {
+object GiftEvent : DiscountPolicy {
 
     private const val CHAMPAGNE_GIFT_STANDARD = 120_000
 

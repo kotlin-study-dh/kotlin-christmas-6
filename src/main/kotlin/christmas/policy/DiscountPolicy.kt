@@ -4,5 +4,5 @@ import christmas.domain.Order
 
 sealed interface DiscountPolicy {
 
-    fun calculateDiscount(order: Order) : Int
+    fun calculateDiscount(order: Order): Int
 }
