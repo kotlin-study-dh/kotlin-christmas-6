@@ -1,4 +1,4 @@
-package christmas.domain
+package christmas.domain.order
 
 data class Price(val value: Double): Comparable<Price> {
     init {

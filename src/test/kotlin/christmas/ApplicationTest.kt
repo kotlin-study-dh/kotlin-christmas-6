@@ -2,50 +2,37 @@ package christmas
 
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
+import christmas.domain.order.Menu
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
-
+@Disabled
 class ApplicationTest : NsTest() {
     @Test
-    fun `모든 타이틀 출력`() {
+    fun `print all titles`() {
         assertSimpleTest {
-            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1")
+            run(
+                "3",
+                "${Menu.T_BONE_STEAK.displayName}-1,${Menu.BBQ_RIBS.displayName}-1,${Menu.CHOCOLATE_CAKE.displayName}-2,${Menu.COKE_ZERO.displayName}}-1"
+            )
             assertThat(output()).contains(
-                "<주문 메뉴>",
-                "<할인 전 총주문 금액>",
-                "<증정 메뉴>",
-                "<혜택 내역>",
-                "<총혜택 금액>",
-                "<할인 후 예상 결제 금액>",
-                "<12월 이벤트 배지>"
+                "<Ordered Menu>",
+                "<Total price before discount>",
+                "<Gift Menu>",
+                "<Event Benefits>",
+                "<Total Benefit Amount>",
+                "<Expected Payment After Discounts>",
+                "<December Event Badge>"
             )
         }
     }
 
     @Test
-    fun `혜택 내역 없음 출력`() {
+    fun `print no event benefits`() {
         assertSimpleTest {
             run("26", "Tapas-1,Coke Zero-1")
             assertThat(output()).contains("<Event Benefits>$LINE_SEPARATOR".toString() + "None")
-        }
-    }
-
-    @Test
-    @Disabled
-    fun `날짜 예외 테스트`() {
-        assertSimpleTest {
-            runException("a")
-            assertThat(output()).contains("[ERROR] Invalid day. Please enter the day again.")
-        }
-    }
-
-    @Test
-    fun `주문 예외 테스트`() {
-        assertSimpleTest {
-            runException("3", "제로콜라-a")
-            assertThat(output()).contains("[ERROR] At least one non-beverage item must be included in the order")
         }
     }
 

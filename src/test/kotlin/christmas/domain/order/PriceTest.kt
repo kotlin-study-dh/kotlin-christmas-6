@@ -1,6 +1,6 @@
-package christmas.domain
+package christmas.domain.order
 
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 class PriceTest {
@@ -13,7 +13,7 @@ class PriceTest {
         val price = Price.from(value)
 
         // Then
-        assertThat(price).isEqualTo(Price(1_000_000.toDouble()))
+        Assertions.assertThat(price).isEqualTo(Price(1_000_000.toDouble()))
     }
 
     @Test
@@ -25,7 +25,7 @@ class PriceTest {
         val actual = price times 3
 
         // Then
-        assertThat(actual).isEqualTo(Price.from(3_333))
+        Assertions.assertThat(actual).isEqualTo(Price.from(3_333))
     }
 
     @Test
@@ -37,6 +37,6 @@ class PriceTest {
         val actual = prices.sum()
 
         // Then
-        assertThat(actual).isEqualTo(Price.from(34_100))
+        Assertions.assertThat(actual).isEqualTo(Price.from(34_100))
     }
 }

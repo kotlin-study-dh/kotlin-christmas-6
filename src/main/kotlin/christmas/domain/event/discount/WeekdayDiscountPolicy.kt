@@ -1,16 +1,17 @@
 package christmas.domain.event.discount
 
-import christmas.domain.MenuSection
-import christmas.domain.Price
-import christmas.domain.order.OrderContext
+import christmas.domain.order.Menu
+import christmas.domain.order.MenuSection
+import christmas.domain.order.Price
 import java.time.DayOfWeek
+import java.time.LocalDate
 
 object WeekdayDiscountPolicy : DiscountPolicy() {
     override val name = "Weekday Discount"
     private const val DISCOUNT_AMOUNT_PER_MENU = 2_023
 
-    override fun checkSpecificEventConditions(orderContext: OrderContext): Boolean {
-        return orderContext.placedDate.dayOfWeek in setOf(
+    override fun checkSpecificEventConditions(placedDate: LocalDate, orderItems: Map<Menu, Int>): Boolean {
+        return placedDate.dayOfWeek in setOf(
             DayOfWeek.SUNDAY,
             DayOfWeek.MONDAY,
             DayOfWeek.TUESDAY,
@@ -19,13 +20,13 @@ object WeekdayDiscountPolicy : DiscountPolicy() {
         )
     }
 
-    override fun getBenefitAmount(orderContext: OrderContext): Price {
-        require(isEligibleFor(orderContext)) {
+    override fun getBenefitAmount(placedDate: LocalDate, orderItems: Map<Menu, Int>): Price {
+        require(isEligibleFor(placedDate, orderItems)) {
             "This order is not eligible for this discount policy."
         }
-        val dessertCount = orderContext.orderItems.keys
+        val dessertCount = orderItems.keys
             .filter { menu -> menu.section == MenuSection.DESSERT }
-            .mapNotNull { menu -> orderContext.orderItems[menu] }
+            .mapNotNull { menu -> orderItems[menu] }
             .sum()
 
         return Price.from(DISCOUNT_AMOUNT_PER_MENU) times dessertCount

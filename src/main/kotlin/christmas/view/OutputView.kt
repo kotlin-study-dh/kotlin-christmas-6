@@ -1,12 +1,11 @@
 package christmas.view
 
 import christmas.domain.order.Order
-import christmas.domain.order.OrderContext
-import christmas.domain.sum
+import christmas.domain.order.sum
 
 object OutputView {
     fun printBenefit(order: Order) {
-        println("Preview of the event benefits you’ll receive at Woowa Restaurant on December ${order.placedDate.dayOfMonth}!")
+        println("Preview of the event benefits you'll receive at Woowa Restaurant on December ${order.placedDate.dayOfMonth}!")
         println()
 
         printMenuItems(order)
@@ -38,7 +37,7 @@ object OutputView {
             println("No gift")
         }
         order.appliedGiftPolicies.forEach { giftPolicy ->
-            val (gift, quantity) = giftPolicy.getGiftFor(OrderContext.from(order))
+            val (gift, quantity) = giftPolicy.getGiftFor(order.placedDate, order.orderItems)
             println("$quantity ${gift.displayName}")
         }
         println()
@@ -52,7 +51,7 @@ object OutputView {
             return
         }
         order.appliedEventPolicies.forEach { eventPolicy ->
-            val benefitAmount = eventPolicy.getBenefitAmount(OrderContext.from(order))
+            val benefitAmount = eventPolicy.getBenefitAmount(order.placedDate, order.orderItems)
             println("${eventPolicy.name}: -$benefitAmount WON")
         }
         println()
@@ -61,7 +60,7 @@ object OutputView {
     private fun printTotalBenefitPrice(order: Order) {
         println("<Total Benefit Amount>")
         val totalBenefit = order.appliedEventPolicies
-            .map { event -> event.getBenefitAmount(OrderContext.from(order)) }
+            .map { event -> event.getBenefitAmount(order.placedDate, order.orderItems) }
             .sum()
         println("-$totalBenefit WON")
         println()

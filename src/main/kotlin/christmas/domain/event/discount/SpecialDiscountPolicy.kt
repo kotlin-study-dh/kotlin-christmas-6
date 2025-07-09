@@ -1,7 +1,7 @@
 package christmas.domain.event.discount
 
-import christmas.domain.Price
-import christmas.domain.order.OrderContext
+import christmas.domain.order.Menu
+import christmas.domain.order.Price
 import java.time.LocalDate
 
 object SpecialDiscountPolicy: DiscountPolicy() {
@@ -15,11 +15,11 @@ object SpecialDiscountPolicy: DiscountPolicy() {
         LocalDate.of(2023, 12, 31),
     )
     
-    override fun checkSpecificEventConditions(orderContext: OrderContext): Boolean {
-        return orderContext.placedDate in specialDays
+    override fun checkSpecificEventConditions(placedDate: LocalDate, orderItems: Map<Menu, Int>): Boolean {
+        return placedDate in specialDays
     }
 
-    override fun getBenefitAmount(orderContext: OrderContext): Price {
+    override fun getBenefitAmount(placedDate: LocalDate, orderItems: Map<Menu, Int>): Price {
         return Price.from(1_000)
     }
 }

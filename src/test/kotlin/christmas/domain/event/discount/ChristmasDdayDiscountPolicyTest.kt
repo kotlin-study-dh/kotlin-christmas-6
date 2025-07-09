@@ -1,38 +1,39 @@
 package christmas.domain.event.discount
 
-import christmas.domain.Menu
-import christmas.domain.Price
-import christmas.domain.order.OrderContext
-import org.assertj.core.api.Assertions
+import christmas.domain.order.Menu
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.MethodSource
 import java.time.LocalDate
 
 class ChristmasDdayDiscountPolicyTest {
 
-    @ParameterizedTest
-    @MethodSource("validDates")
-    fun `return true when placed date belongs to event period`(date: LocalDate) {
-        val order = OrderContext(date, mapOf(Menu.MUSHROOM_SOUP to 1, Menu.T_BONE_STEAK to 1))
+    @Test
+    fun `evaluate eligible when the order is placed on Christmas D-Day`() {
+        val date = LocalDate.of(2023, 12, 25)
+        val orderItems = mapOf(Menu.MUSHROOM_SOUP to 1, Menu.T_BONE_STEAK to 1)
 
-        val actual = ChristmasDdayDiscountPolicy.isEligibleFor(order)
+        val actual = ChristmasDdayDiscountPolicy.isEligibleFor(date, orderItems)
 
-        Assertions.assertThat(actual).isTrue
+        assertThat(actual).isTrue()
     }
 
     @Test
-    fun `calculate discount amount for given order`() {
-        val placedDate = LocalDate.of(2023, 12, 1)
-        val order = OrderContext(placedDate, mapOf(Menu.MUSHROOM_SOUP to 1, Menu.T_BONE_STEAK to 2))
+    fun `evaluate eligible when the order is placed before Christmas D-Day`() {
+        val placedDate = LocalDate.of(2023, 12, 15)
+        val orderItems = mapOf(Menu.MUSHROOM_SOUP to 1, Menu.T_BONE_STEAK to 2)
 
-        val discountAmount = ChristmasDdayDiscountPolicy.getBenefitAmount(order)
+        val actual = ChristmasDdayDiscountPolicy.isEligibleFor(placedDate, orderItems)
 
-        Assertions.assertThat(discountAmount).isEqualTo(Price.Companion.from(1_000))
+        assertThat(actual).isTrue()
     }
 
-    companion object {
-        @JvmStatic
-        fun validDates(): List<LocalDate> = listOf(LocalDate.of(2023, 12, 1), LocalDate.of(2023, 12, 25))
+    @Test
+    fun `evaluate ineligible when the order is placed after Christmas D-Day`() {
+        val placedDate = LocalDate.of(2023, 12, 26)
+        val orderItems = mapOf(Menu.MUSHROOM_SOUP to 1, Menu.T_BONE_STEAK to 1)
+
+        val actual = ChristmasDdayDiscountPolicy.isEligibleFor(placedDate, orderItems)
+
+        assertThat(actual).isFalse()
     }
 }

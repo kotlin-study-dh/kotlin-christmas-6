@@ -1,7 +1,7 @@
 package christmas.view
 
 import camp.nextstep.edu.missionutils.Console
-import christmas.domain.Menu
+import christmas.domain.order.Menu
 import christmas.domain.order.Order
 import java.time.LocalDate
 

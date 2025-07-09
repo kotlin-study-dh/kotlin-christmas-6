@@ -1,33 +1,34 @@
 package christmas.domain.event
 
-import christmas.domain.Menu
-import christmas.domain.Price
+import christmas.domain.order.Menu
+import christmas.domain.order.Price
 import christmas.domain.event.discount.AllDiscountPolicies
 import christmas.domain.event.gift.AllGiftPolicies
+import christmas.domain.order.totalPrice
 import java.time.LocalDate
 
 abstract class EventPolicy {
     abstract val name: String
     
-    fun isEligibleFor(placedDate: LocalDate, totalPrice: Price, orderItems: Map<Menu, Int>): Boolean {
+    fun isEligibleFor(placedDate: LocalDate, orderItems: Map<Menu, Int>): Boolean {
         if (placedDate !in START_DATE..END_DATE) {
             return false
         }
         
-        if (!isEligibleForMinimumPrice(totalPrice)) {
+        if (!isEligibleForMinimumPrice(orderItems.totalPrice())) {
             return false
         }
         
-        return checkSpecificEventConditions(placedDate, totalPrice, orderItems)
+        return checkSpecificEventConditions(placedDate, orderItems)
     }
     
-    abstract fun getBenefitAmount(placedDate: LocalDate, totalPrice: Price, orderItems: Map<Menu, Int>): Price
+    abstract fun getBenefitAmount(placedDate: LocalDate, orderItems: Map<Menu, Int>): Price
     
     protected open fun isEligibleForMinimumPrice(totalPrice: Price): Boolean {
         return totalPrice.value >= MIN_PRICE_FOR_EVENT
     }
     
-    protected abstract fun checkSpecificEventConditions(placedDate: LocalDate, totalPrice: Price, orderItems: Map<Menu, Int>): Boolean
+    protected abstract fun checkSpecificEventConditions(placedDate: LocalDate, orderItems: Map<Menu, Int>): Boolean
     
     companion object {
         private val START_DATE = LocalDate.of(2023, 12, 1)

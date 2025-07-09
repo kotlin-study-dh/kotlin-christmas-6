@@ -1,14 +1,10 @@
 package christmas.domain.order
 
-import christmas.domain.Menu
-import christmas.domain.MenuSection
-import christmas.domain.Price
 import christmas.domain.event.EventPolicy
 import christmas.domain.event.AllEventPolicies
 import christmas.domain.event.discount.DiscountPolicy
 import christmas.domain.event.gift.GiftPolicy
 import christmas.domain.event.badge.DecemberEventBadge
-import christmas.domain.sum
 import java.time.LocalDate
 
 class Order(
@@ -23,21 +19,21 @@ class Order(
         get() = appliedEventPolicies.filterIsInstance<GiftPolicy>()
 
     val totalPlacedPrice: Price
-        get() = orderItems.map { (menu, amount) -> menu.price times amount }.sum()
+        get() = orderItems.totalPrice()
 
     val totalDiscountedPrice: Price
         get() {
             val totalDiscountAmount = appliedDiscountPolicies.map { discountPolicy ->
-                discountPolicy.getBenefitAmount(
-                    OrderContext.from(this)
-                )
+                discountPolicy.getBenefitAmount(placedDate, orderItems)
             }.sum()
             return totalPlacedPrice minus totalDiscountAmount
         }
 
     val totalBenefitPrice: Price
         get() {
-            val totalGiftPrice = appliedGiftPolicies.map { giftPolicy -> giftPolicy.getBenefitAmount(OrderContext.from(this)) }.sum()
+            val totalGiftPrice = appliedGiftPolicies.map { giftPolicy -> 
+                giftPolicy.getBenefitAmount(placedDate, orderItems) 
+            }.sum()
             return totalDiscountedPrice plus totalGiftPrice
         }
 
@@ -57,7 +53,7 @@ class Order(
             "You can order up to $MAX_TOTAL_MENU_QUANTITY menu items per order."
         }
         appliedEventPolicies.forEach { policy ->
-            val eligibleFor = policy.isEligibleFor(OrderContext.from(this))
+            val eligibleFor = policy.isEligibleFor(placedDate, orderItems)
             if (!eligibleFor) throw IllegalArgumentException("Invalid policy for the order - policy: ${policy::class.simpleName}")
         }
     }
@@ -66,9 +62,14 @@ class Order(
         private const val MAX_TOTAL_MENU_QUANTITY = 20
 
         fun of(placedDate: LocalDate, orderItems: Map<Menu, Int>): Order {
-            val orderContext = OrderContext(placedDate, orderItems)
-            val appliedPolicies = AllEventPolicies.values.filter { it.isEligibleFor(orderContext) }
+            val appliedPolicies = AllEventPolicies.values.filter { 
+                it.isEligibleFor(placedDate, orderItems)
+            }
             return Order(placedDate, orderItems, appliedPolicies)
         }
     }
+}
+
+fun Map<Menu, Int>.totalPrice(): Price {
+    return this.map { (menu, amount) -> menu.price times amount }.sum()
 }

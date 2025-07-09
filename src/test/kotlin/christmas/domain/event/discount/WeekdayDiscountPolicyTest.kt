@@ -1,8 +1,7 @@
 package christmas.domain.event.discount
 
-import christmas.domain.Menu
-import christmas.domain.Price
-import christmas.domain.order.OrderContext
+import christmas.domain.order.Menu
+import christmas.domain.order.Price
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
@@ -10,48 +9,32 @@ import java.time.LocalDate
 class WeekdayDiscountPolicyTest {
 
     @Test
-    fun `evaluate as eligible on weekday`() {
-        // Given
+    fun `evaluate eligible when the order is placed on weekday`() {
         val weekday = LocalDate.of(2023, 12, 4)
-        val order = OrderContext(placedDate = weekday, mapOf(Menu.TAPAS to 3))
+        val orderItems = mapOf(Menu.TAPAS to 3)
 
-        // When
-        val actual = WeekdayDiscountPolicy.isEligibleFor(order)
+        val actual = WeekdayDiscountPolicy.isEligibleFor(weekday, orderItems)
 
-        // Then
         assertThat(actual).isTrue()
     }
 
     @Test
-    fun `evaluate as not eligible on weekend`() {
-        // Given
+    fun `evaluate ineligible when the order is placed on weekend`() {
         val weekend = LocalDate.of(2023, 12, 2)
-        val order = OrderContext(placedDate = weekend, mapOf(Menu.TAPAS to 3))
+        val orderItems = mapOf(Menu.TAPAS to 3)
 
-        // When
-        val actual = WeekdayDiscountPolicy.isEligibleFor(order)
+        val actual = WeekdayDiscountPolicy.isEligibleFor(weekend, orderItems)
 
-        // Then
         assertThat(actual).isFalse()
     }
 
     @Test
-    fun `calculates discounted price`() {
+    fun `calculate discount amount for dessert menu items`() {
         val weekday = LocalDate.of(2023, 12, 4)
-        val order = OrderContext(
-            placedDate = weekday,
-            orderItems = mapOf(
-                Menu.MUSHROOM_SOUP to 2,
-                Menu.BBQ_RIBS to 1,
-                Menu.CHOCOLATE_CAKE to 2,
-                Menu.ICE_CREAM to 1,
-            )
-        )
+        val orderItems = mapOf(Menu.CHOCOLATE_CAKE to 2, Menu.ICE_CREAM to 1)
 
-        // When
-        val discountAmount = WeekdayDiscountPolicy.getBenefitAmount(order)
+        val discountAmount = WeekdayDiscountPolicy.getBenefitAmount(weekday, orderItems)
 
-        // Then
-        assertThat(discountAmount).isEqualTo(Price.from(2_023 * 3))
+        assertThat(discountAmount).isEqualTo(Price.from(6_069))
     }
 }

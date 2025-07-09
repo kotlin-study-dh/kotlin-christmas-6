@@ -1,4 +1,4 @@
-package christmas.domain
+package christmas.domain.order
 
 enum class Menu(
     val displayName: String,
@@ -19,7 +19,7 @@ enum class Menu(
     CHAMPAGNE("Champagne", Price.from(25_000), MenuSection.BEVERAGE), ;
 
     companion object {
-        fun from(displayName: String): Menu? = Menu.values().first { it.displayName == displayName }
+        fun from(displayName: String): Menu? = values().first { it.displayName == displayName }
     }
 }
 
