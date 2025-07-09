@@ -1,19 +1,15 @@
-package christmas.domain.event
+package christmas.domain.event.discount
 
 import christmas.domain.MenuSection
 import christmas.domain.Price
 import christmas.domain.order.OrderContext
 import java.time.DayOfWeek
 
-
-object WeekendDiscountPolicy: DiscountPolicy {
+object WeekendDiscountPolicy: DiscountPolicy() {
     override val name = "Weekend Discount"
     private const val DISCOUNT_AMOUNT_PER_MENU = 2_023
 
-    override fun isEligibleFor(orderContext: OrderContext): Boolean {
-        if (!DecemberDiscountBasePolicy.isEligibleForDiscount(orderContext)) {
-            return false
-        }
+    override fun checkSpecificEventConditions(orderContext: OrderContext): Boolean {
         return orderContext.placedDate.dayOfWeek in setOf(
             DayOfWeek.FRIDAY,
             DayOfWeek.SATURDAY,

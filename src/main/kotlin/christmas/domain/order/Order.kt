@@ -5,8 +5,8 @@ import christmas.domain.MenuSection
 import christmas.domain.Price
 import christmas.domain.event.EventPolicy
 import christmas.domain.event.AllEventPolicies
-import christmas.domain.event.DiscountPolicy
-import christmas.domain.event.GiftPolicy
+import christmas.domain.event.discount.DiscountPolicy
+import christmas.domain.event.gift.GiftPolicy
 import christmas.domain.event.badge.DecemberEventBadge
 import christmas.domain.sum
 import java.time.LocalDate

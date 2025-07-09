@@ -2,7 +2,6 @@ package christmas.domain.event.discount
 
 import christmas.domain.Menu
 import christmas.domain.Price
-import christmas.domain.event.ChristmasDdayDiscountPolicy
 import christmas.domain.order.OrderContext
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test

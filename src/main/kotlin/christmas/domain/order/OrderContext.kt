@@ -1,4 +1,3 @@
-// 파일 경로 예시: christmas/domain/order/OrderContext.kt
 package christmas.domain.order
 
 import christmas.domain.Menu
