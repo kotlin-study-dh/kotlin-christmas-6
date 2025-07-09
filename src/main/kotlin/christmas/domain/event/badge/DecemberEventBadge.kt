@@ -1,7 +1,7 @@
 package christmas.domain.event.badge
 
-import christmas.domain.order.Price
 import christmas.domain.order.Order
+import christmas.domain.order.Price
 
 enum class DecemberEventBadge(val displayName: String, val minBenefitPrice: Price) {
     NONE("None", Price.from(0)),
