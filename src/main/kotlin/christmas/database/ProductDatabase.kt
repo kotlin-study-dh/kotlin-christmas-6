@@ -1,4 +1,4 @@
-package christmas.domain.database
+package christmas.database
 
 import christmas.domain.money.Currency.KRW
 import christmas.domain.money.Money

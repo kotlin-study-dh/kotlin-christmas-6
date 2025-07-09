@@ -1,6 +1,6 @@
 package christmas
 
-import christmas.domain.view.InputView
+import christmas.view.InputView
 
 fun main() {
     val visitDate = InputView.readVisitDate()

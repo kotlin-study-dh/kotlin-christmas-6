@@ -1,4 +1,4 @@
-package christmas.domain.view
+package christmas.view
 
 data class CreateOrderDto(
     val name: String,
