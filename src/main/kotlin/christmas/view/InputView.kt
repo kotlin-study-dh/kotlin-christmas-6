@@ -30,7 +30,6 @@ object InputView {
                 .associate { it ->
                     val split = it.split("-")
                     val menu = Menu.from(split[0])
-                        ?: throw IllegalArgumentException("Invalid menu name. Please enter the displayed name exactly.")
                     val quantity = split[1].toInt()
                     menu to quantity
                 }

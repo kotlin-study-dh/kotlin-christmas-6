@@ -19,7 +19,9 @@ enum class Menu(
     CHAMPAGNE("Champagne", Price.from(25_000), MenuSection.BEVERAGE), ;
 
     companion object {
-        fun from(displayName: String): Menu? = values().first { it.displayName == displayName }
+        fun from(name: String): Menu =
+            values().first { it.displayName == name }
+                ?: throw IllegalArgumentException("Invalid menu name. Please enter the displayed name exactly.")
     }
 }
 
