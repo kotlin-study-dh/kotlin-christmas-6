@@ -14,6 +14,15 @@ object Discount {
         GiftEvent
     )
 
-    fun calculateTotalDiscount(order: Order) =
+    fun calculateTotalBenefitAmount(order: Order) =
         discountPolicy.sumOf { it.calculateDiscount(order) }
+
+    fun calculateTotalPayment(order: Order) =
+        order.totalPrice - calculateTotalDiscountAmount(order)
+
+    fun calculateTotalDiscountAmount(order: Order): Int {
+        return discountPolicy
+            .filter { it != GiftEvent }
+            .sumOf { it.calculateDiscount(order) }
+    }
 }

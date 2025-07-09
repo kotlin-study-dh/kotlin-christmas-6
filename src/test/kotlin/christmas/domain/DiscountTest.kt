@@ -15,7 +15,7 @@ class DiscountTest {
                 Menu.ZERO_COKE to 1
             ), 3
         )
-        val totalDiscount = Discount.calculateTotalDiscount(order)
+        val totalDiscount = Discount.calculateTotalBenefitAmount(order)
         assertThat(totalDiscount).isEqualTo(31_246)
     }
 
@@ -27,7 +27,7 @@ class DiscountTest {
                 Menu.ZERO_COKE to 1
             ), 26
         )
-        val totalDiscount = Discount.calculateTotalDiscount(order)
+        val totalDiscount = Discount.calculateTotalBenefitAmount(order)
         assertThat(totalDiscount).isEqualTo(0)
     }
 }
