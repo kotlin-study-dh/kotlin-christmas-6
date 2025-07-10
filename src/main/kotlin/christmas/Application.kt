@@ -1,8 +1,10 @@
 package christmas
 
+import christmas.service.OrderService
 import christmas.view.InputView
 
 fun main() {
     val visitDate = InputView.readVisitDate()
-    val orders = InputView.readProductsToOrder()
+    val ordersDto = InputView.readProductsToOrder()
+    val orders = OrderService.order(ordersDto)
 }
