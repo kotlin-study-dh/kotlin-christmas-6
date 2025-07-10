@@ -7,7 +7,7 @@ import christmas.domain.product.ProductType.*
 import java.math.BigDecimal
 
 object ProductDatabase {
-    val products = mutableListOf(
+    val products = setOf(
         Product(APPETIZER, "양송이수프", Money(BigDecimal(6000), KRW)),
         Product(APPETIZER, "타파스", Money(BigDecimal(5500), KRW)),
         Product(APPETIZER, "시저샐러드", Money(BigDecimal(8000), KRW)),
