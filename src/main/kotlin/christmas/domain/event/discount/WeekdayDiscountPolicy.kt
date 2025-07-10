@@ -11,13 +11,7 @@ object WeekdayDiscountPolicy : DiscountPolicy() {
     private const val DISCOUNT_AMOUNT_PER_MENU = 2_023
 
     override fun checkSpecificEventConditions(placedDate: LocalDate, orderItems: Map<Menu, Int>): Boolean {
-        return placedDate.dayOfWeek in setOf(
-            DayOfWeek.SUNDAY,
-            DayOfWeek.MONDAY,
-            DayOfWeek.TUESDAY,
-            DayOfWeek.WEDNESDAY,
-            DayOfWeek.THURSDAY,
-        )
+        return placedDate.isWeekday()
     }
 
     override fun getBenefitAmount(placedDate: LocalDate, orderItems: Map<Menu, Int>): Price {
@@ -32,3 +26,11 @@ object WeekdayDiscountPolicy : DiscountPolicy() {
         return Price.from(DISCOUNT_AMOUNT_PER_MENU) times dessertCount
     }
 }
+
+fun LocalDate.isWeekday() = this.dayOfWeek in setOf(
+    DayOfWeek.SUNDAY,
+    DayOfWeek.MONDAY,
+    DayOfWeek.TUESDAY,
+    DayOfWeek.WEDNESDAY,
+    DayOfWeek.THURSDAY,
+)

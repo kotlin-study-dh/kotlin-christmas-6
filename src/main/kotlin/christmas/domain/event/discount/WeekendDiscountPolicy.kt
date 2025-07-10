@@ -29,3 +29,8 @@ object WeekendDiscountPolicy: DiscountPolicy() {
         return Price.from(DISCOUNT_AMOUNT_PER_MENU) times mainCount
     }
 }
+
+fun LocalDate.isWeekend() = this.dayOfWeek in setOf(
+    DayOfWeek.FRIDAY,
+    DayOfWeek.SATURDAY,
+)
