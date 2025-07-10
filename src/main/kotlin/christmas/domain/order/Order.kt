@@ -1,10 +1,10 @@
 package christmas.domain.order
 
-import christmas.domain.event.EventPolicy
 import christmas.domain.event.AllEventPolicies
+import christmas.domain.event.EventPolicy
+import christmas.domain.event.badge.DecemberEventBadge
 import christmas.domain.event.discount.DiscountPolicy
 import christmas.domain.event.gift.GiftPolicy
-import christmas.domain.event.badge.DecemberEventBadge
 import java.time.LocalDate
 
 class Order(
@@ -21,20 +21,23 @@ class Order(
     val totalPlacedPrice: Price
         get() = orderItems.totalPrice()
 
+    val totalDiscountAmount: Price
+        get() = appliedDiscountPolicies.map { discountPolicy ->
+            discountPolicy.getBenefitAmount(
+                placedDate,
+                orderItems
+            )
+        }.sum()
+
     val totalDiscountedPrice: Price
-        get() {
-            val totalDiscountAmount = appliedDiscountPolicies.map { discountPolicy ->
-                discountPolicy.getBenefitAmount(placedDate, orderItems)
-            }.sum()
-            return totalPlacedPrice minus totalDiscountAmount
-        }
+        get() = totalPlacedPrice minus totalDiscountAmount
 
     val totalBenefitPrice: Price
         get() {
             val totalGiftPrice = appliedGiftPolicies.map { giftPolicy -> 
                 giftPolicy.getBenefitAmount(placedDate, orderItems) 
             }.sum()
-            return totalDiscountedPrice plus totalGiftPrice
+            return totalDiscountAmount plus totalGiftPrice
         }
 
     val eventBadge: DecemberEventBadge = DecemberEventBadge.getBadgeFor(this)
