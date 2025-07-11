@@ -15,4 +15,13 @@ class MoneyTest {
         val money = Money(BigDecimal.valueOf(0.00), Currency.EUR).multiply(3)
         assert(money == Money(BigDecimal.valueOf(0.00), Currency.EUR))
     }
+
+    @Test
+    fun `add money`() {
+        val money1 = Money.doubleValueOf(3.33, Currency.EUR)
+        val money2 = Money.doubleValueOf(6.67, Currency.EUR)
+        val resultMoney = money1.add(money2)
+
+        assert(resultMoney == Money.doubleValueOf(10.00, Currency.EUR))
+    }
 }

@@ -22,4 +22,9 @@ data class Money(
             currency,
         )
     }
+
+    fun add(target: Money): Money {
+        val resultAmount = amount.add(target.amount)
+        return Money(resultAmount, currency)
+    }
 }
