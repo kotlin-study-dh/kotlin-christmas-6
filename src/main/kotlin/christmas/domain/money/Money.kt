@@ -7,12 +7,12 @@ data class Money(
     val currency: Currency
 ) {
     companion object {
-        fun intValueOf(amount: Int, currency: Currency): Money {
-            return Money(BigDecimal(amount), currency)
+        fun longValueOf(amount: Long, currency: Currency): Money {
+            return Money(BigDecimal.valueOf(amount), currency)
         }
 
         fun doubleValueOf(amount: Double, currency: Currency): Money {
-            return Money(BigDecimal(amount), currency)
+            return Money(BigDecimal.valueOf(amount).setScale(2), currency)
         }
     }
 
