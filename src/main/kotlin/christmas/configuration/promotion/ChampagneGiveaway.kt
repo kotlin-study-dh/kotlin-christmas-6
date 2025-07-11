@@ -1,7 +1,6 @@
 package christmas.configuration.promotion
 
 import christmas.domain.money.Currency
-import christmas.domain.money.Currency.KRW
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
 import christmas.domain.product.Product
@@ -18,7 +17,7 @@ object ChampagneGiveaway : Promotion {
 
     override fun giveawayProduct(orders: Orders): Product? {
         return if (isSuitableForGiveaway(orders)) {
-            Product(DRINK, GIVEAWAY_PRODUCT_NAME, Money(BigDecimal(25000), KRW))
+            Product(DRINK, GIVEAWAY_PRODUCT_NAME, Money(BigDecimal(25000), Currency.KRW))
         } else null
     }
 
