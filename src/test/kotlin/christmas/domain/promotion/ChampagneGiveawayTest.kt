@@ -1,5 +1,6 @@
 package christmas.domain.promotion
 
+import christmas.configuration.promotion.ChampagneGiveaway
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Order

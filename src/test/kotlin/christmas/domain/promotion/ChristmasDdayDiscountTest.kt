@@ -1,5 +1,6 @@
 package christmas.domain.promotion
 
+import christmas.configuration.promotion.ChristmasDdayDiscount
 import christmas.domain.promotion.PromotionTest.Companion.appetizerOrder
 import christmas.domain.promotion.PromotionTest.Companion.drinkOrder
 import christmas.domain.promotion.PromotionTest.Companion.mainOrder

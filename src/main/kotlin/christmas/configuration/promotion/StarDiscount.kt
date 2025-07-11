@@ -1,4 +1,4 @@
-package christmas.domain.promotion
+package christmas.configuration.promotion
 
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
