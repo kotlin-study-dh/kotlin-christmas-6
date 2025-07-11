@@ -7,7 +7,7 @@ import christmas.view.OutputView
 fun main() {
     val visitDate = InputView.readVisitDate()
     val ordersDto = InputView.readProductsToOrder()
-    val orders = OrderService.order(ordersDto)
+    val orders = OrderService.order(visitDate, ordersDto)
 
     OutputView.printEventDescription(12, visitDate)
     OutputView.printOrderDetails(orders)

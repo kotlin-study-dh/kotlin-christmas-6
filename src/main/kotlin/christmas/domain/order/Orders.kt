@@ -2,8 +2,10 @@ package christmas.domain.order
 
 import christmas.domain.money.Money
 import christmas.domain.product.ProductType
+import java.time.LocalDate
 
 data class Orders(
+    val date: LocalDate,
     val orders: List<Order>,
 ) {
     companion object {

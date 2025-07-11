@@ -8,11 +8,16 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 import java.math.BigDecimal
+import java.time.LocalDate
 
 class OrdersTest {
+    companion object {
+        private val date = LocalDate.of(2023, 12, 1)
+    }
+
     @Test
     fun `should throw exception when no Order has made`() {
-        assertThrows<IllegalArgumentException> { Orders(emptyList()) }
+        assertThrows<IllegalArgumentException> { Orders(date, emptyList()) }
     }
 
     @Test
@@ -23,7 +28,7 @@ class OrdersTest {
         val order1 = Order(product1, 1)
         val order2 = Order(product2, 2)
 
-        val orders = Orders(listOf(order1, order2))
+        val orders = Orders(date, listOf(order1, order2))
 
         assert(orders.totalPrice() == Money(BigDecimal(12.99), Currency.EUR))
     }
@@ -36,7 +41,7 @@ class OrdersTest {
         val order1 = Order(drink1, 1)
         val order2 = Order(drink2, 2)
 
-        assertThrows<IllegalArgumentException> { Orders(listOf(order1, order2)) }
+        assertThrows<IllegalArgumentException> { Orders(date, listOf(order1, order2)) }
     }
 
     @Test
@@ -47,7 +52,7 @@ class OrdersTest {
         val order1 = Order(product1, 10)
         val order2 = Order(product2, 10)
 
-        assertDoesNotThrow { Orders(listOf(order1, order2)) }
+        assertDoesNotThrow { Orders(date, listOf(order1, order2)) }
     }
 
     @Test
@@ -60,6 +65,6 @@ class OrdersTest {
         val order2 = Order(product2, 10)
         val order3 = Order(product3, 1)
 
-        assertThrows<IllegalArgumentException> { Orders(listOf(order1, order2, order3)) }
+        assertThrows<IllegalArgumentException> { Orders(date, listOf(order1, order2, order3)) }
     }
 }

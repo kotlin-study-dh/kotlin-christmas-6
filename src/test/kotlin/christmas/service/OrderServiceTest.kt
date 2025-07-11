@@ -13,7 +13,7 @@ class OrderServiceTest {
             CreateOrderDto("티본스테이크", 3),
         )
 
-        val orders = OrderService.order(ordersDto)
+        val orders = OrderService.order(1, ordersDto)
 
         assertThat(orders.orders.map { it.product.name }).containsOnly("타파스", "티본스테이크")
         assertThat(orders.orders.map { it.amount }).containsOnly(2, 3)
