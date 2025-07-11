@@ -1,4 +1,4 @@
-package christmas.domain.event
+package christmas.domain.promotion
 
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
@@ -6,7 +6,7 @@ import christmas.domain.order.Order
 import christmas.domain.product.Product
 import christmas.domain.product.ProductType
 
-interface EventTest {
+interface PromotionTest {
     companion object {
         private val appetizer = Product(ProductType.APPETIZER, "salad", Money.longValueOf(10000, Currency.KRW))
         private val main = Product(ProductType.MAIN, "steak", Money.longValueOf(10000, Currency.KRW))

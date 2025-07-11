@@ -1,31 +1,29 @@
-package christmas.domain.event
+package christmas.domain.promotion
 
-import christmas.domain.event.EventTest.Companion.dessertOrder
+import christmas.domain.promotion.PromotionTest.Companion.mainOrder
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
-import org.assertj.core.api.Assertions
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import java.time.LocalDate
 import java.util.stream.Stream
 
-class WeekdayDessertDiscountTest : EventTest {
-    val event = WeekdayDessertDiscount()
-
-    @ParameterizedTest
-    @MethodSource("weekdays")
-    fun `weekday, 2 desserts - discount 4046 KRW`(date: LocalDate) {
-        val orders = Orders(date, listOf(dessertOrder))
-        val discountAmount = event.discountAmount(orders)
-
-        Assertions.assertThat(discountAmount).isEqualTo(Money.longValueOf(4046, Currency.KRW))
-    }
+class WeekendMainDishDiscountTest {
+    val event = WeekendMainDishDiscount()
 
     @ParameterizedTest
     @MethodSource("weekends")
-    fun `weekend, 2 desserts - discount 0 KRW`(date: LocalDate) {
-        val orders = Orders(date, listOf(dessertOrder))
+    fun `weekend, 2 main dishes - discount 4046 KRW`(date: LocalDate) {
+        val orders = Orders(date, listOf(mainOrder))
+        val discountAmount = event.discountAmount(orders)
+        assert(discountAmount == Money.longValueOf(4046, Currency.KRW))
+    }
+
+    @ParameterizedTest
+    @MethodSource("weekdays")
+    fun `weekday, 0 main dishes - discount 0 KRW`(date: LocalDate) {
+        val orders = Orders(date, listOf(mainOrder))
         val discountAmount = event.discountAmount(orders)
         assert(discountAmount == Money.longValueOf(0, Currency.KRW))
     }

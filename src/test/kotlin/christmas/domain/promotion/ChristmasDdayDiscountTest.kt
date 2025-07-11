@@ -1,8 +1,8 @@
-package christmas.domain.event
+package christmas.domain.promotion
 
-import christmas.domain.event.EventTest.Companion.appetizerOrder
-import christmas.domain.event.EventTest.Companion.drinkOrder
-import christmas.domain.event.EventTest.Companion.mainOrder
+import christmas.domain.promotion.PromotionTest.Companion.appetizerOrder
+import christmas.domain.promotion.PromotionTest.Companion.drinkOrder
+import christmas.domain.promotion.PromotionTest.Companion.mainOrder
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
@@ -11,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.time.LocalDate
 
-class ChristmasDdayDiscountTest : EventTest {
+class ChristmasDdayDiscountTest : PromotionTest {
 
     @ParameterizedTest
     @CsvSource("1,1000", "25,3400", "26,0")

@@ -1,4 +1,4 @@
-package christmas.domain.event
+package christmas.domain.promotion
 
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
@@ -6,7 +6,7 @@ import christmas.domain.order.Orders
 import christmas.domain.product.Product
 import java.math.BigDecimal
 
-class ChristmasDdayDiscount : Event {
+class ChristmasDdayDiscount : Promotion {
     companion object {
         private const val START_DAY = 1
         private const val END_DAY = 25

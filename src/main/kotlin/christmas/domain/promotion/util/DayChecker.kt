@@ -1,4 +1,4 @@
-package christmas.domain.event.util
+package christmas.domain.promotion.util
 
 import java.time.DayOfWeek
 import java.time.DayOfWeek.FRIDAY
