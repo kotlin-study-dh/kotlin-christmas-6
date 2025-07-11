@@ -1,7 +1,9 @@
 package christmas.view
 
+import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Order
+import java.text.DecimalFormat
 
 object OutputView {
     fun printEventDescription(month: Int, day: Int) {
@@ -19,6 +21,8 @@ object OutputView {
 
     fun printTotalPriceBeforeDiscount(price: Money) {
         println("<할인 전 총주문 금액>")
-        println(price)
+        val formattedNumber = DecimalFormat("#,###.##").format(price.amount)
+        val currencyDisplayName = if (price.currency == Currency.KRW) "원" else price.currency
+        println("${formattedNumber}$currencyDisplayName")
     }
 }
