@@ -2,7 +2,7 @@ package christmas.view
 
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
-import christmas.domain.order.Order
+import christmas.domain.order.Orders
 import java.text.DecimalFormat
 
 object OutputView {
@@ -11,9 +11,9 @@ object OutputView {
         println()
     }
 
-    fun printOrderDetails(orders: List<Order>) {
+    fun printOrderDetails(orders: Orders) {
         println("<주문 메뉴>")
-        orders.forEach {
+        orders.orders.forEach {
             println("${it.product.name} ${it.amount}개")
         }
         println()

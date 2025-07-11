@@ -1,11 +1,8 @@
 package christmas
 
-import christmas.domain.money.Currency
-import christmas.domain.money.Money
 import christmas.service.OrderService
 import christmas.view.InputView
 import christmas.view.OutputView
-import java.math.BigDecimal
 
 fun main() {
     val visitDate = InputView.readVisitDate()
@@ -14,5 +11,5 @@ fun main() {
 
     OutputView.printEventDescription(12, visitDate)
     OutputView.printOrderDetails(orders)
-    OutputView.printTotalPriceBeforeDiscount(Money(BigDecimal.ZERO, Currency.KRW))
+    OutputView.printTotalPriceBeforeDiscount(orders.totalPrice())
 }
