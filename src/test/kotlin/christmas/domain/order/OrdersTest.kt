@@ -5,9 +5,15 @@ import christmas.domain.money.Money
 import christmas.domain.product.Product
 import christmas.domain.product.ProductType
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.math.BigDecimal
 
 class OrdersTest {
+    @Test
+    fun `should throw exception when no Order has made`() {
+        assertThrows<IllegalArgumentException> { Orders(emptyList()) }
+    }
+
     @Test
     fun totalPrice() {
         val product1 = Product(ProductType.MAIN, "steak", Money(BigDecimal(10.99), Currency.EUR))
