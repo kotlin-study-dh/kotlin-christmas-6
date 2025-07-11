@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource
 import java.time.LocalDate
 
 class StarDiscountTest : PromotionTest {
-    private val promotion = StarDiscount()
+    private val promotion = StarDiscount
 
     @ParameterizedTest
     @ValueSource(ints = [3, 10, 17, 24, 25, 31])

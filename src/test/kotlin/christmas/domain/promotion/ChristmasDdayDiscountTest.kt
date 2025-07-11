@@ -19,7 +19,7 @@ class ChristmasDdayDiscountTest : PromotionTest {
     fun discountAmount(day: Int, amount: Long) {
         // given
         val orders = Orders(LocalDate.of(2023, 12, day), listOf(appetizerOrder, mainOrder, drinkOrder))
-        val event = ChristmasDdayDiscount()
+        val event = ChristmasDdayDiscount
 
         // when
         val discountAmount = event.discountAmount(orders)
@@ -32,7 +32,7 @@ class ChristmasDdayDiscountTest : PromotionTest {
     fun giveawayProduct() {
         // given
         val orders = Orders(LocalDate.of(2023, 12, 1), listOf(appetizerOrder, mainOrder, drinkOrder))
-        val event = ChristmasDdayDiscount()
+        val event = ChristmasDdayDiscount
 
         // when
         val giveaway = event.giveawayProduct(orders)

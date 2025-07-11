@@ -1,17 +1,17 @@
 package christmas.domain.promotion
 
 import christmas.configuration.promotion.WeekendMainDishDiscount
-import christmas.domain.promotion.PromotionTest.Companion.mainOrder
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
+import christmas.domain.promotion.PromotionTest.Companion.mainOrder
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import java.time.LocalDate
 import java.util.stream.Stream
 
 class WeekendMainDishDiscountTest {
-    val event = WeekendMainDishDiscount()
+    val event = WeekendMainDishDiscount
 
     @ParameterizedTest
     @MethodSource("weekends")

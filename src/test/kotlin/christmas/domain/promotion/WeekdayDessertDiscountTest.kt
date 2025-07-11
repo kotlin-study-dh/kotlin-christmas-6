@@ -12,7 +12,7 @@ import java.time.LocalDate
 import java.util.stream.Stream
 
 class WeekdayDessertDiscountTest : PromotionTest {
-    val event = WeekdayDessertDiscount()
+    val event = WeekdayDessertDiscount
 
     @ParameterizedTest
     @MethodSource("weekdays")

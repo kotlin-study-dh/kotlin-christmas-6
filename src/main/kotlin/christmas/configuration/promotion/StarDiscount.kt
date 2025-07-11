@@ -7,7 +7,7 @@ import christmas.domain.product.Product
 import java.time.DayOfWeek
 import java.time.LocalDate
 
-class StarDiscount : Promotion {
+object StarDiscount : Promotion {
     override fun discountAmount(orders: Orders): Money {
         if (isStarDay(orders.date)) {
             return Money.longValueOf(1000, Currency.KRW)

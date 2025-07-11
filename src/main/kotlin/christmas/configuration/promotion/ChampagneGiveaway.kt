@@ -1,18 +1,16 @@
 package christmas.configuration.promotion
 
 import christmas.domain.money.Currency
+import christmas.domain.money.Currency.KRW
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
 import christmas.domain.product.Product
-import christmas.repository.InMemoryProductRepository
+import christmas.domain.product.ProductType.DRINK
+import java.math.BigDecimal
 
-class ChampagneGiveaway : Promotion {
-    private val productRepository = InMemoryProductRepository
-
-    companion object {
-        private const val GIVEAWAY_PRODUCT_NAME = "샴페인"
-        private val MIN_ORDER_PRICE_FOR_GIVEAWAY = Money.longValueOf(120_000, Currency.KRW)
-    }
+object ChampagneGiveaway : Promotion {
+    private const val GIVEAWAY_PRODUCT_NAME = "샴페인"
+    private val MIN_ORDER_PRICE_FOR_GIVEAWAY = Money.longValueOf(120_000, Currency.KRW)
 
     override fun discountAmount(orders: Orders): Money {
         return Money.longValueOf(0, Currency.KRW)
@@ -20,7 +18,7 @@ class ChampagneGiveaway : Promotion {
 
     override fun giveawayProduct(orders: Orders): Product? {
         return if (isSuitableForGiveaway(orders)) {
-            productRepository.findByName(GIVEAWAY_PRODUCT_NAME)
+            Product(DRINK, GIVEAWAY_PRODUCT_NAME, Money(BigDecimal(25000), KRW))
         } else null
     }
 

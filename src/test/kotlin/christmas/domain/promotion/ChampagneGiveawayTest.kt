@@ -14,7 +14,7 @@ import java.time.LocalDate
 
 class ChampagneGiveawayTest : PromotionTest {
 
-    private val promotion = ChampagneGiveaway()
+    private val promotion = ChampagneGiveaway
 
     @Test
     fun `should giveaway when order price is 120_000`() {
