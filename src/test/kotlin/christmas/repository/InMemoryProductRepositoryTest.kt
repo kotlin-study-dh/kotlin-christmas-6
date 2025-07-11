@@ -5,6 +5,7 @@ import christmas.domain.money.Money
 import christmas.domain.product.Product
 import christmas.domain.product.ProductType.APPETIZER
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.math.BigDecimal
 
 class InMemoryProductRepositoryTest {
@@ -22,8 +23,9 @@ class InMemoryProductRepositoryTest {
     }
 
     @Test
-    fun `should return null when product does not exist`() {
-        val findByName = InMemoryProductRepository.findByName("aaaaaaaaaaaaaaa")
-        assert(findByName == null)
+    fun `should throw exception when product does not exist`() {
+        assertThrows<IllegalArgumentException> {
+            InMemoryProductRepository.findByName("aaaaaaaaaaaaaaa")
+        }
     }
 }
