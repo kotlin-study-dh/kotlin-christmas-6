@@ -8,12 +8,14 @@ import christmas.domain.product.ProductType
 
 interface EventTest {
     companion object {
-        private val product1 = Product(ProductType.APPETIZER, "salad", Money.longValueOf(10000, Currency.KRW))
-        private val product2 = Product(ProductType.MAIN, "steak", Money.longValueOf(20000, Currency.KRW))
-        private val product3 = Product(ProductType.DRINK, "coke", Money.longValueOf(1000, Currency.KRW))
+        private val appetizer = Product(ProductType.APPETIZER, "salad", Money.longValueOf(10000, Currency.KRW))
+        private val main = Product(ProductType.MAIN, "steak", Money.longValueOf(10000, Currency.KRW))
+        private val dessert = Product(ProductType.DESSERT, "cake", Money.longValueOf(10000, Currency.KRW))
+        private val drink = Product(ProductType.DRINK, "coke", Money.longValueOf(10000, Currency.KRW))
 
-        val order1 = Order(product1, 1)
-        val order2 = Order(product2, 2)
-        val order3 = Order(product3, 3)
+        val appetizerOrder = Order(appetizer, 2)
+        val mainOrder = Order(main, 2)
+        val dessertOrder = Order(dessert, 2)
+        val drinkOrder = Order(drink, 2)
     }
 }

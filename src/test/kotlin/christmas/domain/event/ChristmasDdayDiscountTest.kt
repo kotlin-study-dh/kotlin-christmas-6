@@ -1,8 +1,8 @@
 package christmas.domain.event
 
-import christmas.domain.event.EventTest.Companion.order1
-import christmas.domain.event.EventTest.Companion.order2
-import christmas.domain.event.EventTest.Companion.order3
+import christmas.domain.event.EventTest.Companion.appetizerOrder
+import christmas.domain.event.EventTest.Companion.drinkOrder
+import christmas.domain.event.EventTest.Companion.mainOrder
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
@@ -17,7 +17,7 @@ class ChristmasDdayDiscountTest : EventTest {
     @CsvSource("1,1000", "25,3400", "26,0")
     fun discountAmount(day: Int, amount: Long) {
         // given
-        val orders = Orders(LocalDate.of(2023, 12, day), listOf(order1, order2, order3))
+        val orders = Orders(LocalDate.of(2023, 12, day), listOf(appetizerOrder, mainOrder, drinkOrder))
         val event = ChristmasDdayDiscount()
 
         // when
@@ -30,7 +30,7 @@ class ChristmasDdayDiscountTest : EventTest {
     @Test
     fun giveawayProduct() {
         // given
-        val orders = Orders(LocalDate.of(2023, 12, 1), listOf(order1, order2, order3))
+        val orders = Orders(LocalDate.of(2023, 12, 1), listOf(appetizerOrder, mainOrder, drinkOrder))
         val event = ChristmasDdayDiscount()
 
         // when
