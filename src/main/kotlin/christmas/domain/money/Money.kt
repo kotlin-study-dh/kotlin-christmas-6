@@ -5,7 +5,7 @@ import java.math.BigDecimal
 data class Money(
     val amount: BigDecimal,
     val currency: Currency
-) {
+) : Comparable<Money> {
     companion object {
         fun longValueOf(amount: Long, currency: Currency): Money {
             return Money(BigDecimal.valueOf(amount), currency)
@@ -26,5 +26,9 @@ data class Money(
     fun add(target: Money): Money {
         val resultAmount = amount.add(target.amount)
         return Money(resultAmount, currency)
+    }
+
+    override fun compareTo(other: Money): Int {
+        return amount.compareTo(other.amount)
     }
 }
