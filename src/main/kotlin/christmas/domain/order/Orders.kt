@@ -1,5 +1,6 @@
 package christmas.domain.order
 
+import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.product.ProductType
 import java.time.LocalDate
@@ -17,6 +18,10 @@ data class Orders(
         validateOrderNotEmpty()
         validateProductTypes()
         validateOrderAmount()
+    }
+
+    fun currency(): Currency {
+        return orders.first().currency()
     }
 
     fun totalPrice(): Money {
