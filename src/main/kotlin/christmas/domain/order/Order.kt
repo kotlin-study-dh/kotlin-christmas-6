@@ -8,6 +8,10 @@ data class Order(
     val product: Product,
     val amount: Int,
 ) {
+    init {
+        require(amount > 0) { "You should order at least 1 product." }
+    }
+
     fun orderPrice(): Money {
         return product.price.multiply(amount)
     }
