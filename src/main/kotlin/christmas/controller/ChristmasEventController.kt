@@ -25,7 +25,7 @@ class ChristmasEventController {
     fun start() {
         OutputView.printWelcomeMessage()
 
-        val order = order()
+        val order = getOrder()
         OutputView.printEventPreviewMessage(order.day)
         OutputView.printOrderSummary(order)
 
@@ -43,7 +43,7 @@ class ChristmasEventController {
         OutputView.printBadge(badge)
     }
 
-    private fun order(): Order {
+    private fun getOrder(): Order {
         val visitDate = retryOnFailure {
             val visitDay = InputView.readVisitDay()
             runCatching {
