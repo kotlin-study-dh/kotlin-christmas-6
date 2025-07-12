@@ -7,7 +7,7 @@ import java.time.LocalDate
 data class SpecialDiscounter(val reservation: Reservation) : Discounter {
 
     override fun discount(): Money {
-        return reservation.aggregatePurchaseAmount() - Money(FIXED_DISCOUNT_COST)
+        return Money(FIXED_DISCOUNT_COST)
     }
 
     override fun isApplicable(): Boolean {

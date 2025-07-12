@@ -8,8 +8,7 @@ data class WeekendDiscounter(val reservation: Reservation) : Discounter {
 
     override fun discount(): Money {
         val count = reservation.countMenuByCategory(Category.MAIN)
-        val totalDiscount = Money(FIXED_DISCOUNT_COST * count)
-        return reservation.aggregatePurchaseAmount() - totalDiscount
+        return Money(FIXED_DISCOUNT_COST * count)
     }
 
     override fun isApplicable(): Boolean {

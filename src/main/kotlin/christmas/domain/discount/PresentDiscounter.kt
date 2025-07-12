@@ -6,7 +6,7 @@ import christmas.domain.order.Reservation
 data class PresentDiscounter(val reservation: Reservation) : Discounter {
 
     override fun discount(): Money {
-        return reservation.aggregatePurchaseAmount() - Money(CHAMPAGNE_PRICE)
+        return Money(CHAMPAGNE_PRICE)
     }
 
     override fun isApplicable(): Boolean {

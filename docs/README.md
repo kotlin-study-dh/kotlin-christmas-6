@@ -32,8 +32,6 @@ Badges will be given according to the discount amount.
     - [x] Special Discounter
     - [x] Present Discounter
 
-- [ ] 
-
 - [ ] Reception
     - [ ] validate domain requirements (e.g, maximum number of menus that can be received, verify valid reserve date)
     - [ ] calculate the purchase amount.

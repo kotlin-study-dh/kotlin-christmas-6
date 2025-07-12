@@ -3,7 +3,7 @@ package christmas.domain.menu
 data class Money(val money: Long) : Comparable<Money> {
 
     init {
-        require(money > 0L) {
+        require(money >= 0L) {
             "Amount must be positive"
         }
     }
@@ -23,4 +23,8 @@ data class Money(val money: Long) : Comparable<Money> {
     override fun compareTo(other: Money): Int {
         return this.money.compareTo(other.money)
     }
+}
+
+fun Iterable<Money>.sum(): Money {
+    return this.fold(Money(0L)) { sum, money -> sum + money }
 }
