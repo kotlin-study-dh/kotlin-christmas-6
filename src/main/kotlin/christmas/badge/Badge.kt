@@ -14,8 +14,8 @@ enum class Badge(
             require(totalBenefitAmount >= NONE.totalBenefitAmountThreshold) {
                 "Total Benefit amount must be greater than or equal to ${NONE.totalBenefitAmountThreshold}."
             }
-            return entries.findLast { totalBenefitAmount >= it.totalBenefitAmountThreshold }
-                ?: NONE
+            return entries.sortedBy { it.totalBenefitAmountThreshold }
+                .findLast { totalBenefitAmount >= it.totalBenefitAmountThreshold } ?: NONE
         }
     }
 }
