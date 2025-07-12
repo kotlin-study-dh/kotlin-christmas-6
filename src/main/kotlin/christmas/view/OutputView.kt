@@ -3,7 +3,7 @@ package christmas.view
 import christmas.badge.Badge
 import christmas.event.EventSignature
 import christmas.menu.Menu
-import christmas.menu.Order
+import christmas.order.Order
 import java.text.DecimalFormat
 
 object OutputView {

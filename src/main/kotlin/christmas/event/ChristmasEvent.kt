@@ -1,6 +1,6 @@
 package christmas.event
 
-import christmas.menu.Order
+import christmas.order.Order
 
 interface ChristmasEvent {
     fun calculateBenefitAmount(order: Order): Int

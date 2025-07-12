@@ -1,7 +1,7 @@
 package christmas.event
 
 import christmas.menu.Menu
-import christmas.menu.Order
+import christmas.order.Order
 
 object GiveawayEvent : AbstractChristmasEvent() {
     private const val MIN_ORDER_AMOUNT = 120_000

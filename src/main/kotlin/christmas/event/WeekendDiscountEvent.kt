@@ -1,7 +1,7 @@
 package christmas.event
 
 import christmas.menu.Category
-import christmas.menu.Order
+import christmas.order.Order
 
 object WeekendDiscountEvent : AbstractChristmasEvent() {
     private const val DISCOUNT_AMOUNT_PER_MENU = 2_023

@@ -1,6 +1,6 @@
 package christmas.event
 
-import christmas.menu.Order
+import christmas.order.Order
 
 object SpecialDiscountEvent : AbstractChristmasEvent() {
     private const val DISCOUNT_AMOUNT = 1_000

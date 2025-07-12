@@ -1,7 +1,7 @@
 package christmas.event
 
 import christmas.menu.Menu
-import christmas.menu.Order
+import christmas.order.Order
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest

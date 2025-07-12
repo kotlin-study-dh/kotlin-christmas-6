@@ -1,6 +1,6 @@
 package christmas.event
 
-import christmas.menu.Order
+import christmas.order.Order
 
 abstract class AbstractChristmasEvent : ChristmasEvent {
     final override fun calculateBenefitAmount(order: Order): Int {

@@ -8,7 +8,7 @@ import christmas.event.GiveawayEvent
 import christmas.event.SpecialDiscountEvent
 import christmas.event.WeekdayDiscountEvent
 import christmas.event.WeekendDiscountEvent
-import christmas.menu.Order
+import christmas.order.Order
 import christmas.view.InputView
 import christmas.view.OutputView
 import java.time.LocalDate

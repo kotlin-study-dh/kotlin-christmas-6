@@ -1,6 +1,8 @@
-package christmas.menu
+package christmas.order
 
+import christmas.menu.Category
 import christmas.menu.Category.DRINK
+import christmas.menu.Menu
 import christmas.util.isWeekDay
 import christmas.util.isWeekend
 import java.time.LocalDate

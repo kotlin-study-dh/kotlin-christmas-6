@@ -1,5 +1,6 @@
-package christmas.menu
+package christmas.order
 
+import christmas.menu.Category
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
