@@ -10,6 +10,13 @@ object OutputView {
     private const val NO_BENEFIT_MESSAGE = "없음"
     private const val ERROR_MESSAGE_PREFIX = "[ERROR] "
     private val numberFormatter = DecimalFormat("#,###")
+    private val eventSignatureNames = mapOf(
+        EventSignature.WEEKDAY_DISCOUNT to "평일 할인",
+        EventSignature.WEEKEND_DISCOUNT to "주말 할인",
+        EventSignature.SPECIAL_DISCOUNT to "특별 할인",
+        EventSignature.D_DAY_DISCOUNT to "크리스마스 디데이 할인",
+        EventSignature.GIVEAWAY to "증정 이벤트"
+    )
 
     fun printWelcomeMessage() {
         println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.")
@@ -47,14 +54,7 @@ object OutputView {
                 }
             }
             .forEach { (eventSignature, amount) ->
-                val eventSignatureName = when (eventSignature) {
-                    EventSignature.WEEKDAY_DISCOUNT -> "평일 할인"
-                    EventSignature.WEEKEND_DISCOUNT -> "주말 할인"
-                    EventSignature.SPECIAL_DISCOUNT -> "특별 할인"
-                    EventSignature.D_DAY_DISCOUNT -> "크리스마스 디데이 할인"
-                    EventSignature.GIVEAWAY -> "증정 이벤트"
-                }
-                println("$eventSignatureName: -${numberFormatter.format(amount)}원")
+                println("${eventSignatureNames[eventSignature]}: -${numberFormatter.format(amount)}원")
             }
         printTotalBenefitAmount(benefitAmounts)
     }
