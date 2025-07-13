@@ -6,11 +6,12 @@ import christmas.domain.menu.Money
 
 data class Order(val orders: List<Menu>) {
 
-    fun aggregatePurchaseAmount(): Money {
-        return orders
-            .map { it.price }
-            .reduce { acc, amount -> acc + amount }
-    }
+    private val _purchaseAmount = orders
+        .map { it.price }
+        .reduce { acc, amount -> acc + amount }
+
+    val aggregatePurchaseAmount: Money
+        get() = _purchaseAmount
 
     fun count(category: Category): Int {
         return orders.filter { it.category == category }

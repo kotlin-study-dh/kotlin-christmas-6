@@ -29,7 +29,7 @@ data class Reservation(val date: LocalDate, val order: Order) {
     }
 
     fun aggregatePurchaseAmount(): Money {
-        return order.aggregatePurchaseAmount()
+        return order.aggregatePurchaseAmount
     }
 
     fun countMenuByCategory(category: Category): Int {

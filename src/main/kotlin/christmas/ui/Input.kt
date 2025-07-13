@@ -26,12 +26,8 @@ object Input {
 
     private fun parseMenuInput(input: String): List<String> {
         if (input.isBlank()) return emptyList()
-
         val menuTokens = input.split(",")
-
-        return menuTokens.flatMap { token ->
-            parseMenuToken(token)
-        }
+        return menuTokens.flatMap(::parseMenuToken)
     }
 
     private fun parseMenuToken(token: String): List<String> {
@@ -40,6 +36,7 @@ object Input {
 
         val name = parts[0]
         val count = parts[1].toIntOrNull() ?: return emptyList()
+        if (count <= 0) throw IllegalArgumentException("메뉴는 1개 이상이어야 합니다.")
 
         return List(count) { name }
     }
