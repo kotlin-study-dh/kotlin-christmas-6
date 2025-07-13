@@ -1,6 +1,7 @@
 package christmas.domain
 
 import christmas.domain.discount.*
+import christmas.domain.menu.Money
 import christmas.domain.menu.repository.MenuRepository
 import christmas.domain.order.Order
 import christmas.domain.order.Reservation
@@ -56,7 +57,7 @@ class Reception(reservationDay: Int, demands: List<String>) {
     }
 
     private fun applyDiscount(discounter: Discounter): Long {
-        if (discounter.isApplicable()) {
+        if (discounter.isApplicable() && reservation.aggregatePurchaseAmount() > Money(10_000L)) {
             return discounter.discount().money
         }
         return 0L

@@ -11,6 +11,9 @@ data class Order(val orders: List<Menu>) {
         require(orders.filter { order -> order.category == Category.BEVERAGE }.size != orders.size) {
             "you can not order beverage only"
         }
+        require(orders.groupBy { it.name }.size == orders.size) {
+            "menu name must not duplicate"
+        }
     }
 
     private val _purchaseAmount = orders

@@ -24,10 +24,6 @@ object MenuRepository {
         Menu("샴페인", Money(25_000L), Category.BEVERAGE)
     )
 
-    fun findByCategory(category: Category): List<Menu> {
-        return menus.filter { it.category == category }
-    }
-
     fun findByName(name: String): Menu {
         val find = menus.find { it.name == name }
         if (find == null) {
