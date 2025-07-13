@@ -26,7 +26,7 @@ object WeekendDiscountPolicy: DiscountPolicy() {
             .mapNotNull { menu -> orderItems[menu] }
             .sum()
 
-        return Price.from(DISCOUNT_AMOUNT_PER_MENU) times mainCount
+        return Price.from(DISCOUNT_AMOUNT_PER_MENU) * mainCount
     }
 }
 

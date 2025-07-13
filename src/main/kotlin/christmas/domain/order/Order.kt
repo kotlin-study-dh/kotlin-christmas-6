@@ -30,14 +30,14 @@ class Order(
         }.sum()
 
     val totalDiscountedPrice: Price
-        get() = totalPlacedPrice minus totalDiscountAmount
+        get() = totalPlacedPrice - totalDiscountAmount
 
     val totalBenefitPrice: Price
         get() {
             val totalGiftPrice = appliedGiftPolicies.map { giftPolicy -> 
                 giftPolicy.getBenefitAmount(placedDate, orderItems) 
             }.sum()
-            return totalDiscountAmount plus totalGiftPrice
+            return totalDiscountAmount + totalGiftPrice
         }
 
     val eventBadge: DecemberEventBadge = DecemberEventBadge.getBadgeFor(this)
@@ -74,5 +74,5 @@ class Order(
 }
 
 fun Map<Menu, Int>.totalPrice(): Price {
-    return this.map { (menu, amount) -> menu.price times amount }.sum()
+    return this.map { (menu, amount) -> menu.price * amount }.sum()
 }

@@ -22,7 +22,7 @@ class PriceTest {
         val price = Price.from(1_111)
 
         // When
-        val actual = price times 3
+        val actual = price * 3
 
         // Then
         Assertions.assertThat(actual).isEqualTo(Price.from(3_333))
