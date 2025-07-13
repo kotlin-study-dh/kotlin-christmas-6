@@ -28,7 +28,11 @@ object MenuRepository {
         return menus.filter { it.category == category }
     }
 
-    fun findByName(name: String): Menu? {
-        return menus.find { it.name == name }
+    fun findByName(name: String): Menu {
+        val find = menus.find { it.name == name }
+        if (find == null) {
+            throw IllegalArgumentException("등록되지 않은 메뉴입니다.")
+        }
+        return find
     }
 }

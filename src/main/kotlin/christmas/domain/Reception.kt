@@ -9,7 +9,8 @@ import java.time.LocalDate
 class Reception(reservationDay: Int, demands: List<String>) {
 
     val reservation = {
-        val menus = demands.mapNotNull { MenuRepository.findByName(it) }
+        require(demands.isNotEmpty()) { "유효하지 않은 주문입니다." }
+        val menus = demands.map { MenuRepository.findByName(it) }
         val order = Order(menus)
         Reservation(LocalDate.of(2023, 12, reservationDay), order)
     }()
