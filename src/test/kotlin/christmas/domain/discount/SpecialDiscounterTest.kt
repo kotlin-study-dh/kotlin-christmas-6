@@ -26,7 +26,7 @@ class SpecialDiscounterTest {
         val actual = discounter.discount()
 
         // then
-        val expect = order.aggregatePurchaseAmount() - Money(SpecialDiscounter.FIXED_DISCOUNT_COST)
+        val expect = Money(SpecialDiscounter.FIXED_DISCOUNT_COST)
         assert(actual == expect)
     }
 

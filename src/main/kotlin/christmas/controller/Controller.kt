@@ -11,7 +11,11 @@ typealias Bill = List<Pair<String, Long>>
 object Controller {
 
     fun control() {
-        val result = handleRequest()
+        val date = ErrorHandler.handle {
+            Input.enterReservationDate()
+        }
+
+        val result = handleRequest(date)
         val badge = Badge.from(Money(result.discountAmount))
         Output.printMenuSummary(result.menus)
         Output.printPreDiscountAmount(result.purchaseAmount)
@@ -22,9 +26,8 @@ object Controller {
         Output.printBadge(badge.title)
     }
 
-    private fun handleRequest(): ReceptionResult {
+    private fun handleRequest(reservationDate: Int): ReceptionResult {
         val result = ErrorHandler.handle {
-            val reservationDate = Input.enterReservationDate()
             val menus = Input.enterMenus()
             val reception = Reception(reservationDate, menus)
             val purchaseAmount = reception.aggregatePurchaseAmount()
@@ -41,6 +44,6 @@ object Controller {
             Pair("주말 할인", reception.applyWeekendDiscount()),
             Pair("특별 할인", reception.applySpecialDiscount()),
             Pair("증정 할인", reception.applyPresentDiscount())
-        )
+        ).filter { it.second != 0L }
     }
 }

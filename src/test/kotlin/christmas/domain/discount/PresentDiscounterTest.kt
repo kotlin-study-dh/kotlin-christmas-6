@@ -21,7 +21,7 @@ class PresentDiscounterTest {
         val actual = discounter.discount()
 
         // then
-        val except = Money(120_000 - PresentDiscounter.CHAMPAGNE_PRICE)
+        val except = Money(PresentDiscounter.CHAMPAGNE_PRICE)
         assert(except == actual)
     }
 

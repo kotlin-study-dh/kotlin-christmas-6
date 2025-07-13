@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
-@Disabled
+
 class ApplicationTest : NsTest() {
     @Test
     fun `모든 타이틀 출력`() {
@@ -33,6 +33,7 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    @Disabled
     fun `날짜 예외 테스트`() {
         assertSimpleTest {
             runException("a")
@@ -41,6 +42,7 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    @Disabled
     fun `주문 예외 테스트`() {
         assertSimpleTest {
             runException("3", "제로콜라-a")

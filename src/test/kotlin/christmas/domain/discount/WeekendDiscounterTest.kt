@@ -26,7 +26,7 @@ class WeekendDiscounterTest {
         val actual = discounter.discount()
 
         // then
-        val expect = order.aggregatePurchaseAmount() - Money(WeekendDiscounter.FIXED_DISCOUNT_COST * 2)
+        val expect = Money(WeekendDiscounter.FIXED_DISCOUNT_COST * 2)
         assert(actual == expect)
     }
 

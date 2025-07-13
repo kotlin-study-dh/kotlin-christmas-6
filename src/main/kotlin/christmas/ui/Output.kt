@@ -5,6 +5,7 @@ object Output {
     fun printMenuSummary(menus: List<String>) {
         val grouped = menus.groupingBy { it }.eachCount()
 
+        println("<주문 메뉴>")
         grouped.forEach { (menu, count) ->
             println("$menu ${count}개")
         }
