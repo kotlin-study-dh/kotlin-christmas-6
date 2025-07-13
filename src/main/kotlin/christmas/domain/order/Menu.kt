@@ -20,7 +20,7 @@ enum class Menu(
 
     companion object {
         fun from(name: String): Menu =
-            values().firstOrNull { it.displayName == name }
+            Menu.entries.firstOrNull { it.displayName == name }
                 ?: throw IllegalArgumentException("Invalid menu name. Please enter the displayed name exactly.")
     }
 }
