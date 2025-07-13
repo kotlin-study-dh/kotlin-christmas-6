@@ -1,6 +1,7 @@
 package christmas.domain.menu
 
-data class Money(val money: Long) : Comparable<Money> {
+@JvmInline
+value class Money(val money: Long) : Comparable<Money> {
 
     init {
         require(money >= 0L) {

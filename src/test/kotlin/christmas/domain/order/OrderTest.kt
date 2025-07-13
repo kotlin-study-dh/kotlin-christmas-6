@@ -23,7 +23,7 @@ class OrderTest {
         )
 
         // when
-        val actual = order.aggregatePurchaseAmount()
+        val actual = order.aggregatePurchaseAmount
 
         // then
         val expect = price1 + price2 + price3 + price4
