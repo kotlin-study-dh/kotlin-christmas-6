@@ -14,7 +14,8 @@ object InputView {
     private fun readVisitDate(): LocalDate {
         println("When do you plan to visit the restaurant in December? (Please enter numbers only!)")
         retry {
-            val day = Console.readLine().toInt()
+            val day = Console.readLine().toIntOrNull()
+                ?: throw IllegalArgumentException("Invalid input. Please enter numbers only.")
             require(day in 1..31) { "Invalid day. Please enter the day again." }
             return LocalDate.of(2023, 12, day)
         }
