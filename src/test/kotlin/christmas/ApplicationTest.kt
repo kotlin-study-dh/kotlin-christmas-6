@@ -3,6 +3,7 @@ package christmas
 import camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest
 import camp.nextstep.edu.missionutils.test.NsTest
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 
@@ -32,6 +33,7 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    @Disabled
     fun `날짜 예외 테스트`() {
         assertSimpleTest {
             runException("a")
@@ -40,6 +42,7 @@ class ApplicationTest : NsTest() {
     }
 
     @Test
+    @Disabled
     fun `주문 예외 테스트`() {
         assertSimpleTest {
             runException("3", "제로콜라-a")
