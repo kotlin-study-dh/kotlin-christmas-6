@@ -1,0 +1,77 @@
+package christmas.event
+
+import christmas.menu.Menu
+import christmas.order.Order
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+import java.time.LocalDate
+
+class WeekdayDiscountEventTest {
+    private val event = WeekdayDiscountEvent
+    private val weekday = LocalDate.of(2023, 12, 4)
+
+    @Test
+    fun `calculates discount amount for dessert menus in a weekday order`() {
+        // given
+        val menuAndCounts = mapOf(
+            Menu.TAPAS to 2,
+            Menu.T_BONE_STAKE to 1,
+            Menu.CHOCOLATE_CAKE to 3
+        )
+        val order = Order(menuAndCounts, weekday)
+
+        // when
+        val benefitAmount = event.calculateBenefitAmount(order)
+
+        // then
+        assertThat(benefitAmount).isEqualTo(6_069)
+    }
+
+    @Test
+    fun `does not calculate discount amount when order amount is below minimum`() {
+        // given
+        val menuAndCounts = mapOf(
+            Menu.TAPAS to 1,
+        )
+        val order = Order(menuAndCounts, weekday)
+
+        // when
+        val benefitAmount = event.calculateBenefitAmount(order)
+
+        // then
+        assertThat(benefitAmount).isEqualTo(0)
+    }
+
+    @Test
+    fun `does not calculate discount amount when order is on a weekend`() {
+        // given
+        val weekend = LocalDate.of(2023, 12, 2)
+        val menuAndCounts = mapOf(
+            Menu.T_BONE_STAKE to 1,
+            Menu.CHOCOLATE_CAKE to 3
+        )
+        val order = Order(menuAndCounts, weekend)
+
+        // when
+        val benefitAmount = event.calculateBenefitAmount(order)
+
+        // then
+        assertThat(benefitAmount).isEqualTo(0)
+    }
+
+    @Test
+    fun `does not calculate discount amount when there are no dessert menus`() {
+        // given
+        val menuAndCounts = mapOf(
+            Menu.TAPAS to 2,
+            Menu.T_BONE_STAKE to 1
+        )
+        val order = Order(menuAndCounts, weekday)
+
+        // when
+        val benefitAmount = event.calculateBenefitAmount(order)
+
+        // then
+        assertThat(benefitAmount).isEqualTo(0)
+    }
+}
