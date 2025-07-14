@@ -17,9 +17,6 @@ class Order(
     constructor(menus: Map<Menu, Int>, orderDate: Int) : this(menus, Date(orderDate))
 
     fun getDayOfWeek(): DayOfWeek {
-        require(date in DECEMBER_START_DATE..DECEMBER_END_DATE) {
-            "date must be between $DECEMBER_START_DATE and $DECEMBER_END_DATE"
-        }
         val decemberFirst = LocalDate.of(EVENT_YEAR, DECEMBER, DECEMBER_START_DATE)
         return decemberFirst.plusDays((date - 1).toLong()).dayOfWeek
     }
