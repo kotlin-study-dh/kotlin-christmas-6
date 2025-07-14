@@ -1,6 +1,6 @@
 package christmas.domain
 
-class Date(val date: Int) {
+data class Date(val date: Int) {
 
     init {
         require(date in 1..31) {
