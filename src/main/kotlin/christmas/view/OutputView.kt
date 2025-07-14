@@ -1,7 +1,7 @@
 package christmas.view
 
 import christmas.domain.Badge
-import christmas.domain.Discount
+import christmas.domain.DiscountCalculator
 import christmas.domain.Menu
 import christmas.domain.Order
 import christmas.policy.ChristmasDDayDiscount
@@ -50,7 +50,7 @@ object OutputView {
     }
 
     private fun printTotalBenefitsPrice(order: Order) {
-        val totalBenefitAmount = Discount.calculateTotalBenefitAmount(order)
+        val totalBenefitAmount = DiscountCalculator.calculateTotalBenefitAmount(order)
         val prefix = if (totalBenefitAmount > 0) "-" else ""
         println("<총혜택 금액>\n${prefix}${String.format("%,d", totalBenefitAmount)}원\n")
     }
@@ -89,8 +89,8 @@ object OutputView {
     }
 
     private fun printEstimatedPayment(order: Order) =
-        println("<할인 후 예상 결제 금액>\n${String.format("%,d", Discount.calculateTotalPayment(order))}원\n")
+        println("<할인 후 예상 결제 금액>\n${String.format("%,d", DiscountCalculator.calculateTotalPayment(order))}원\n")
 
     private fun printBadge(order: Order) =
-        println("<12월 이벤트 배지>\n${Badge.choose(Discount.calculateTotalBenefitAmount(order)).itemName}")
+        println("<12월 이벤트 배지>\n${Badge.choose(DiscountCalculator.calculateTotalBenefitAmount(order)).itemName}")
 }

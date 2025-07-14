@@ -5,7 +5,7 @@ import christmas.policy.GiftEvent
 import christmas.policy.SpecialDiscount
 import christmas.policy.WeeklyDiscount
 
-object Discount {
+object DiscountCalculator {
 
     private val discountPolicy = listOf(
         ChristmasDDayDiscount,
