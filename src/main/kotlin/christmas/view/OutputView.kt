@@ -22,29 +22,41 @@ object OutputView {
 
     fun printTotalPriceBeforeDiscount(price: Money) {
         println("<할인 전 총주문 금액>")
-        println("${priceDisplayName(price)}${currencyDisplayName(price)}")
+        println(formatMoney(price))
         println()
     }
 
     fun printPromotionDetails(promotions: List<Promotion>, orders: Orders) {
+        printAppliedPromotions(promotions, orders)
+        printTotalBenefitPrice(promotions, orders)
+    }
+
+    private fun printAppliedPromotions(
+        promotions: List<Promotion>,
+        orders: Orders
+    ) {
         println("<혜택 내역>")
         promotions.forEach { promotion ->
             val name = PromotionNameMapper.map(promotion)
             val amount = promotion.discountAmount(orders)
-            println("$name: -${priceDisplayName(amount)}원") // TODO display discount amount for giveaways
+            println("$name: -${formatMoney(amount)}") // TODO display discount amount for giveaways
         }
         println()
     }
 
-    private fun priceDisplayName(price: Money): String {
-        return DecimalFormat("#,###.##").format(price.amount)
+    private fun printTotalBenefitPrice(promotions: List<Promotion>, orders: Orders) {
+        // TODO display discount amount for giveaways
+        println("<총혜택 금액>")
+        var benefitPrice = Money.longValueOf(0, Currency.KRW)
+        promotions.forEach { benefitPrice = benefitPrice.add(it.discountAmount(orders)) }
+        println("-${formatMoney(benefitPrice)}")
+        println()
     }
 
-    private fun currencyDisplayName(money: Money): String {
-        if (money.currency == Currency.KRW) {
-            return "원"
-        }
+    private fun formatMoney(money: Money): String {
+        val amount = DecimalFormat("#,###.##").format(money.amount)
+        val currency = if (money.currency == Currency.KRW) "원" else money.currency.toString()
 
-        return money.currency.toString()
+        return amount + currency
     }
 }
