@@ -9,19 +9,17 @@ import java.math.BigDecimal
 
 object ChampagneGiveaway : Promotion {
     private const val GIVEAWAY_PRODUCT_NAME = "샴페인"
-    private val MIN_ORDER_PRICE_FOR_GIVEAWAY = Money.longValueOf(120_000, Currency.KRW)
+    private val MINIMUM_ORDER_PRICE = Money.longValueOf(120_000, Currency.KRW)
 
     override fun discountAmount(orders: Orders): Money {
         return Money.longValueOf(0, Currency.KRW)
     }
 
     override fun giveawayProduct(orders: Orders): Product? {
-        return if (isSuitableForGiveaway(orders)) {
-            Product(DRINK, GIVEAWAY_PRODUCT_NAME, Money(BigDecimal(25000), Currency.KRW))
-        } else null
+        return Product(DRINK, GIVEAWAY_PRODUCT_NAME, Money(BigDecimal(25000), Currency.KRW))
     }
 
-    private fun isSuitableForGiveaway(orders: Orders): Boolean {
-        return orders.totalPrice() >= MIN_ORDER_PRICE_FOR_GIVEAWAY
+    override fun meetsMinimumOrderPrice(orders: Orders): Boolean {
+        return orders.totalPrice() >= MINIMUM_ORDER_PRICE
     }
 }

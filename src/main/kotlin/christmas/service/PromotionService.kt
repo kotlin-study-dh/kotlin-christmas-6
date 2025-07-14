@@ -4,12 +4,7 @@ import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
 import christmas.domain.product.Product
-import christmas.domain.promotion.ChampagneGiveaway
-import christmas.domain.promotion.ChristmasDdayDiscount
-import christmas.domain.promotion.Promotion
-import christmas.domain.promotion.StarDiscount
-import christmas.domain.promotion.WeekdayDessertDiscount
-import christmas.domain.promotion.WeekendMainDishDiscount
+import christmas.domain.promotion.*
 
 object PromotionService {
     private val promotions: List<Promotion> = listOf(
@@ -21,7 +16,9 @@ object PromotionService {
     )
 
     fun findAppliedPromotions(orders: Orders): List<Promotion> {
-        return promotions.filter { promotion -> isPromoted(promotion, orders) }
+        return promotions
+            .filter { promotion -> promotion.meetsMinimumOrderPrice(orders) }
+            .filter { promotion -> isPromoted(promotion, orders) }
     }
 
     private fun isPromoted(promotion: Promotion, orders: Orders): Boolean {
