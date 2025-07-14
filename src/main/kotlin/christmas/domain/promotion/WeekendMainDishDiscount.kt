@@ -1,21 +1,21 @@
-package christmas.configuration.promotion
+package christmas.domain.promotion
 
-import christmas.configuration.promotion.util.DayChecker.isWeekday
+import christmas.domain.promotion.util.DayChecker.isWeekend
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
 import christmas.domain.product.Product
 import christmas.domain.product.ProductType
 
-object WeekdayDessertDiscount : Promotion {
+object WeekendMainDishDiscount : Promotion {
     private val DISCOUNT_AMOUNT = Money.longValueOf(2023, Currency.KRW)
 
     override fun discountAmount(orders: Orders): Money {
         val dayOfWeek = orders.date.dayOfWeek
 
-        if (dayOfWeek.isWeekday()) {
-            val dessertCount = countDesserts(orders)
-            val totalDiscountMoney = DISCOUNT_AMOUNT.multiply(dessertCount)
+        if (dayOfWeek.isWeekend()) {
+            val mainCount = countMainDishes(orders)
+            val totalDiscountMoney = DISCOUNT_AMOUNT.multiply(mainCount)
             return totalDiscountMoney
         }
 
@@ -26,9 +26,9 @@ object WeekdayDessertDiscount : Promotion {
         return null
     }
 
-    private fun countDesserts(orders: Orders): Int {
+    private fun countMainDishes(orders: Orders): Int {
         return orders.orders
-            .filter { it.product.productType == ProductType.DESSERT }
+            .filter { it.product.productType == ProductType.MAIN }
             .sumOf { order -> order.amount }
     }
 }

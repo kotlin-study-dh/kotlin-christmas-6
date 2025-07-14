@@ -1,6 +1,11 @@
 package christmas.view
 
-import christmas.configuration.promotion.*
+import christmas.domain.promotion.ChampagneGiveaway
+import christmas.domain.promotion.ChristmasDdayDiscount
+import christmas.domain.promotion.Promotion
+import christmas.domain.promotion.StarDiscount
+import christmas.domain.promotion.WeekdayDessertDiscount
+import christmas.domain.promotion.WeekendMainDishDiscount
 
 object PromotionNameMapper {
     private val names = mapOf(

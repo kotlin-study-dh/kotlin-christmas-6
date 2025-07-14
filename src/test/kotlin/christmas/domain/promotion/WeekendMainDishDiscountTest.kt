@@ -1,6 +1,5 @@
 package christmas.domain.promotion
 
-import christmas.configuration.promotion.WeekendMainDishDiscount
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders

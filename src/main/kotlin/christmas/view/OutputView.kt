@@ -1,6 +1,6 @@
 package christmas.view
 
-import christmas.configuration.promotion.Promotion
+import christmas.domain.promotion.Promotion
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders

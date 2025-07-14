@@ -1,7 +1,5 @@
 package christmas.service
 
-import christmas.configuration.promotion.Promotion
-import christmas.configuration.promotion.Promotions
 import christmas.domain.order.Order
 import christmas.domain.order.Orders
 import christmas.repository.InMemoryProductRepository
@@ -18,10 +16,5 @@ object OrderService {
             orders = orders.map {
                 Order(productRepository.findByName(it.name), it.amount)
             })
-    }
-
-    fun getPromotionDetails(orders: Orders) : List<Promotion> {
-        val promotions = Promotions()
-        return promotions.findAppliedPromotions(orders)
     }
 }

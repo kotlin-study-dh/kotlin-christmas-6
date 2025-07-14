@@ -1,4 +1,4 @@
-package christmas.configuration.promotion
+package christmas.domain.promotion
 
 import christmas.domain.money.Money
 import christmas.domain.order.Orders

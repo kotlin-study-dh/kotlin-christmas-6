@@ -1,6 +1,7 @@
 package christmas
 
 import christmas.service.OrderService
+import christmas.service.PromotionService
 import christmas.view.InputView
 import christmas.view.OutputView
 
@@ -13,7 +14,7 @@ fun main() {
     OutputView.printOrderDetails(orders)
     OutputView.printTotalPriceBeforeDiscount(orders.totalPrice())
 
-    val promotionDetails = OrderService.getPromotionDetails(orders)
+    val promotionDetails = PromotionService.findAppliedPromotions(orders)
     OutputView.printPromotionDetails(promotionDetails, orders)
     OutputView.printEstimatedPriceToPay(promotionDetails, orders)
 }
