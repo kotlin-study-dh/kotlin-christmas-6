@@ -1,11 +1,11 @@
-package christmas.domain.promotion
+package christmas.domain.promotion.strategy
 
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
 import christmas.domain.product.Product
 
-interface Promotion {
+interface PromotionStrategy {
     fun discountAmount(orders: Orders): Money
     fun giveawayProduct(orders: Orders): Product?
     fun meetsMinimumOrderPrice(orders: Orders): Boolean {

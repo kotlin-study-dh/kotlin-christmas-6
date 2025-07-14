@@ -4,10 +4,11 @@ import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
 import christmas.domain.product.Product
-import christmas.domain.promotion.*
+import christmas.domain.promotion.PromotionBenefit
+import christmas.domain.promotion.strategy.*
 
 object PromotionService {
-    private val promotions: List<Promotion> = listOf(
+    private val promotionStrategies: List<PromotionStrategy> = listOf(
         ChampagneGiveaway,
         ChristmasDdayDiscount,
         StarDiscount,
@@ -15,15 +16,23 @@ object PromotionService {
         WeekendMainDishDiscount,
     )
 
-    fun findAppliedPromotions(orders: Orders): List<Promotion> {
-        return promotions
+    fun findPromotionBenefits(orders: Orders): List<PromotionBenefit> {
+        val applicableStrategies = promotionStrategies
             .filter { promotion -> promotion.meetsMinimumOrderPrice(orders) }
             .filter { promotion -> isPromoted(promotion, orders) }
+
+        return applicableStrategies.map { strategy ->
+            PromotionBenefit(
+                strategy,
+                strategy.discountAmount(orders),
+                strategy.giveawayProduct(orders)
+            )
+        }
     }
 
-    private fun isPromoted(promotion: Promotion, orders: Orders): Boolean {
-        val discountAmount = promotion.discountAmount(orders)
-        val giveawayProduct = promotion.giveawayProduct(orders)
+    private fun isPromoted(promotionStrategy: PromotionStrategy, orders: Orders): Boolean {
+        val discountAmount = promotionStrategy.discountAmount(orders)
+        val giveawayProduct = promotionStrategy.giveawayProduct(orders)
 
         return !isNotPromoted(discountAmount, giveawayProduct)
     }
@@ -31,5 +40,26 @@ object PromotionService {
     private fun isNotPromoted(discountAmount: Money, giveawayProduct: Product?): Boolean {
         return discountAmount == Money.Companion.longValueOf(0, Currency.KRW)
                 && giveawayProduct == null
+    }
+
+    fun findBenefitPrice(promotionBenefits: List<PromotionBenefit>): Money {
+        var benefitPrice = Money.longValueOf(0, Currency.KRW)
+
+        promotionBenefits.forEach {
+            benefitPrice = benefitPrice.add(it.discountAmount)
+            benefitPrice = benefitPrice.add(it.giveawayProduct?.price ?: Money.longValueOf(0, Currency.KRW))
+        }
+
+        return benefitPrice
+    }
+
+    fun findDiscountPrice(promotionBenefits: List<PromotionBenefit>): Money {
+        var discountPrice = Money.longValueOf(0, Currency.KRW)
+
+        promotionBenefits.forEach {
+            discountPrice = discountPrice.add(it.discountAmount)
+        }
+
+        return discountPrice
     }
 }

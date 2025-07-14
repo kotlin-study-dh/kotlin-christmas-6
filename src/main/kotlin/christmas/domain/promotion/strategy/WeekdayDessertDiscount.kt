@@ -1,4 +1,4 @@
-package christmas.domain.promotion
+package christmas.domain.promotion.strategy
 
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
@@ -7,7 +7,7 @@ import christmas.domain.product.Product
 import christmas.domain.product.ProductType
 import christmas.domain.promotion.util.DayChecker.isWeekday
 
-object WeekdayDessertDiscount : Promotion {
+object WeekdayDessertDiscount : PromotionStrategy {
     private val DISCOUNT_AMOUNT = Money.longValueOf(2023, Currency.KRW)
 
     override fun discountAmount(orders: Orders): Money {

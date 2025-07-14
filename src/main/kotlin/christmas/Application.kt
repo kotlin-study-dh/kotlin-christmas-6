@@ -14,7 +14,11 @@ fun main() {
     OutputView.printOrderDetails(orders)
     OutputView.printTotalPriceBeforeDiscount(orders.totalPrice())
 
-    val promotionDetails = PromotionService.findAppliedPromotions(orders)
-    OutputView.printPromotionDetails(promotionDetails, orders)
-    OutputView.printEstimatedPriceToPay(promotionDetails, orders)
+    val promotionBenefits = PromotionService.findPromotionBenefits(orders)
+    val benefitPrice = PromotionService.findBenefitPrice(promotionBenefits)
+    val discountPrice = PromotionService.findDiscountPrice(promotionBenefits)
+
+    OutputView.printPromotionBenefits(promotionBenefits)
+    OutputView.printBenefitPrice(benefitPrice)
+    OutputView.printPaymentPrice(orders.totalPrice().subtract(discountPrice))
 }

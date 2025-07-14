@@ -5,6 +5,7 @@ import christmas.domain.money.Money
 import christmas.domain.order.Orders
 import christmas.domain.promotion.PromotionTest.Companion.dessertOrder
 import christmas.domain.promotion.PromotionTest.Companion.mainOrder
+import christmas.domain.promotion.strategy.StarDiscount
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource

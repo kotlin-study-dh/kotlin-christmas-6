@@ -1,10 +1,10 @@
 package christmas.service
 
-import christmas.domain.promotion.ChristmasDdayDiscount
-import christmas.domain.promotion.StarDiscount
-import christmas.domain.promotion.WeekdayDessertDiscount
 import christmas.domain.order.Orders
 import christmas.domain.promotion.PromotionTest
+import christmas.domain.promotion.strategy.ChristmasDdayDiscount
+import christmas.domain.promotion.strategy.StarDiscount
+import christmas.domain.promotion.strategy.WeekdayDessertDiscount
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
@@ -24,11 +24,11 @@ class PromotionServiceTest : PromotionTest {
             )
         )
 
-        Assertions.assertThat(promotionService.findAppliedPromotions(orders))
+        Assertions.assertThat(promotionService.findPromotionBenefits(orders).map { it.type })
             .containsExactlyInAnyOrder(
-                StarDiscount,
-                WeekdayDessertDiscount,
                 ChristmasDdayDiscount,
+                WeekdayDessertDiscount,
+                StarDiscount,
             )
     }
 }

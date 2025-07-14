@@ -1,9 +1,9 @@
 package christmas.view
 
-import christmas.domain.promotion.Promotion
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
+import christmas.domain.promotion.PromotionBenefit
 import java.text.DecimalFormat
 
 object OutputView {
@@ -26,38 +26,25 @@ object OutputView {
         println()
     }
 
-    fun printPromotionDetails(promotions: List<Promotion>, orders: Orders) {
-        printAppliedPromotions(promotions, orders)
-        printTotalBenefitPrice(promotions, orders)
-    }
-
-    private fun printAppliedPromotions(
-        promotions: List<Promotion>,
-        orders: Orders
-    ) {
+    fun printPromotionBenefits(promotionBenefits: List<PromotionBenefit>) {
         println("<혜택 내역>")
-        promotions.forEach { promotion ->
-            val name = PromotionNameMapper.map(promotion)
-            val amount = promotion.discountAmount(orders)
-            println("$name: -${formatMoney(amount)}") // TODO display discount amount for giveaways
+        promotionBenefits.forEach { benefit ->
+            val name = PromotionNameMapper.map(benefit.type)
+            val amount = benefit.benefitAmount()
+            println("$name: -${formatMoney(amount)}")
         }
         println()
     }
 
-    private fun printTotalBenefitPrice(promotions: List<Promotion>, orders: Orders) {
-        // TODO display discount amount for giveaways
+    fun printBenefitPrice(benefitPrice: Money) {
         println("<총혜택 금액>")
-        var benefitPrice = Money.longValueOf(0, Currency.KRW)
-        promotions.forEach { benefitPrice = benefitPrice.add(it.discountAmount(orders)) }
         println("-${formatMoney(benefitPrice)}")
         println()
     }
 
-    fun printEstimatedPriceToPay(promotions: List<Promotion>, orders: Orders) {
+    fun printPaymentPrice(paymentPrice: Money) {
         println("<할인 후 예상 결제 금액>")
-        var payPrice = orders.totalPrice()
-        promotions.forEach { payPrice = payPrice.subtract(it.discountAmount(orders)) }
-        println(formatMoney(payPrice))
+        println(formatMoney(paymentPrice))
         println()
     }
 

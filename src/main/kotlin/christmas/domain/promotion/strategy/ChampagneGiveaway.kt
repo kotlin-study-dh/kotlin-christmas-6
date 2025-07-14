@@ -1,4 +1,4 @@
-package christmas.domain.promotion
+package christmas.domain.promotion.strategy
 
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
@@ -7,7 +7,7 @@ import christmas.domain.product.Product
 import christmas.domain.product.ProductType.DRINK
 import java.math.BigDecimal
 
-object ChampagneGiveaway : Promotion {
+object ChampagneGiveaway : PromotionStrategy {
     private const val GIVEAWAY_PRODUCT_NAME = "샴페인"
     private val MINIMUM_ORDER_PRICE = Money.longValueOf(120_000, Currency.KRW)
 

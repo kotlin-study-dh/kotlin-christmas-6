@@ -1,11 +1,11 @@
 package christmas.view
 
-import christmas.domain.promotion.ChampagneGiveaway
-import christmas.domain.promotion.ChristmasDdayDiscount
-import christmas.domain.promotion.Promotion
-import christmas.domain.promotion.StarDiscount
-import christmas.domain.promotion.WeekdayDessertDiscount
-import christmas.domain.promotion.WeekendMainDishDiscount
+import christmas.domain.promotion.strategy.ChampagneGiveaway
+import christmas.domain.promotion.strategy.ChristmasDdayDiscount
+import christmas.domain.promotion.strategy.PromotionStrategy
+import christmas.domain.promotion.strategy.StarDiscount
+import christmas.domain.promotion.strategy.WeekdayDessertDiscount
+import christmas.domain.promotion.strategy.WeekendMainDishDiscount
 
 object PromotionNameMapper {
     private val names = mapOf(
@@ -16,7 +16,7 @@ object PromotionNameMapper {
         WeekendMainDishDiscount to "주말 할인",
     )
 
-    fun map(promotion: Promotion): String? {
-        return names[promotion] ?: throw IllegalStateException()
+    fun map(promotionStrategy: PromotionStrategy): String? {
+        return names[promotionStrategy] ?: throw IllegalStateException()
     }
 }
