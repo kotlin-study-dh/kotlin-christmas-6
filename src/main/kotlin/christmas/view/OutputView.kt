@@ -53,6 +53,14 @@ object OutputView {
         println()
     }
 
+    fun printEstimatedPriceToPay(promotions: List<Promotion>, orders: Orders) {
+        println("<할인 후 예상 결제 금액>")
+        var payPrice = orders.totalPrice()
+        promotions.forEach { payPrice = payPrice.subtract(it.discountAmount(orders)) }
+        println(formatMoney(payPrice))
+        println()
+    }
+
     private fun formatMoney(money: Money): String {
         val amount = DecimalFormat("#,###.##").format(money.amount)
         val currency = if (money.currency == Currency.KRW) "원" else money.currency.toString()

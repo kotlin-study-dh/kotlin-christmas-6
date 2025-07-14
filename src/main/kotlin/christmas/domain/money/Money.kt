@@ -28,6 +28,12 @@ data class Money(
         return Money(resultAmount, currency)
     }
 
+    fun subtract(target: Money): Money {
+        val resultAmount = amount.subtract(target.amount)
+        require(resultAmount >= BigDecimal(0)) { "Money cannot have negative value." }
+        return Money(resultAmount, currency)
+    }
+
     override fun compareTo(other: Money): Int {
         return amount.compareTo(other.amount)
     }

@@ -15,4 +15,5 @@ fun main() {
 
     val promotionDetails = OrderService.getPromotionDetails(orders)
     OutputView.printPromotionDetails(promotionDetails, orders)
+    OutputView.printEstimatedPriceToPay(promotionDetails, orders)
 }

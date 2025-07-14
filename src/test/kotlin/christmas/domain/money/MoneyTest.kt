@@ -1,6 +1,7 @@
 package christmas.domain.money
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import java.math.BigDecimal
 
 class MoneyTest {
@@ -23,5 +24,22 @@ class MoneyTest {
         val resultMoney = money1.add(money2)
 
         assert(resultMoney == Money.doubleValueOf(10.00, Currency.EUR))
+    }
+
+    @Test
+    fun `subtract money`() {
+        val money1 = Money.doubleValueOf(3.33, Currency.EUR)
+        val money2 = Money.doubleValueOf(3.33, Currency.EUR)
+        val resultMoney = money1.subtract(money2)
+
+        assert(resultMoney == Money.doubleValueOf(0.00, Currency.EUR))
+    }
+
+    @Test
+    fun `throw exception when subtract result is negative`() {
+        val money1 = Money.doubleValueOf(3.33, Currency.EUR)
+        val money2 = Money.doubleValueOf(3.34, Currency.EUR)
+
+        assertThrows<IllegalArgumentException> { money1.subtract(money2) }
     }
 }
