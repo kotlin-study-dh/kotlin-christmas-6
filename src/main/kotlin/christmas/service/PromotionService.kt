@@ -42,6 +42,11 @@ object PromotionService {
                 && giveawayProduct == null
     }
 
+    fun findGiveawayProduct(promotionBenefits: List<PromotionBenefit>): Product? {
+        return promotionBenefits.find { it.type == ChampagneGiveaway }
+            ?.giveawayProduct
+    }
+
     fun findBenefitPrice(promotionBenefits: List<PromotionBenefit>): Money {
         var benefitPrice = Money.longValueOf(0, Currency.KRW)
 

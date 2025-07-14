@@ -34,6 +34,10 @@ data class Money(
         return Money(resultAmount, currency)
     }
 
+    fun isZero(): Boolean {
+        return amount.compareTo(BigDecimal.valueOf(0L)) == 0
+    }
+
     override fun compareTo(other: Money): Int {
         return amount.compareTo(other.amount)
     }

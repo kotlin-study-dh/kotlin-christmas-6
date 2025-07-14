@@ -3,6 +3,7 @@ package christmas.view
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
+import christmas.domain.product.Product
 import christmas.domain.promotion.PromotionBenefit
 import java.text.DecimalFormat
 
@@ -26,8 +27,27 @@ object OutputView {
         println()
     }
 
+    fun printGiveawayProduct(product: Product?) {
+        println("<증정 메뉴>")
+
+        if (product == null) {
+            println("없음")
+        } else {
+            println("${product.name} 1개")
+        }
+
+        println()
+    }
+
     fun printPromotionBenefits(promotionBenefits: List<PromotionBenefit>) {
         println("<혜택 내역>")
+
+        if (promotionBenefits.isEmpty()) {
+            println("없음")
+            println()
+            return
+        }
+
         promotionBenefits.forEach { benefit ->
             val name = PromotionNameMapper.map(benefit.type)
             val amount = benefit.benefitAmount()
@@ -38,7 +58,10 @@ object OutputView {
 
     fun printBenefitPrice(benefitPrice: Money) {
         println("<총혜택 금액>")
-        println("-${formatMoney(benefitPrice)}")
+
+        if (benefitPrice.isZero().not()) print("-")
+
+        println(formatMoney(benefitPrice))
         println()
     }
 

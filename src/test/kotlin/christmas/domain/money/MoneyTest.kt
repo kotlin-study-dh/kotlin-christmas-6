@@ -42,4 +42,15 @@ class MoneyTest {
 
         assertThrows<IllegalArgumentException> { money1.subtract(money2) }
     }
+
+    @Test
+    fun isZero() {
+        val zero1 = Money.longValueOf(0, Currency.KRW)
+        val zero2 = Money.doubleValueOf(0.0, Currency.KRW)
+        val zero3 = Money.doubleValueOf(0.00, Currency.KRW)
+
+        assert(zero1.isZero())
+        assert(zero2.isZero())
+        assert(zero3.isZero())
+    }
 }
