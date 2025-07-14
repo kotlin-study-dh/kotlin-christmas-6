@@ -9,7 +9,7 @@ class Order(
 ) {
 
     init {
-        require(menus.values.sumOf { it } <= 20) {
+        require(menus.values.sumOf { it } <= MAX_ORDER_MENU_AMOUNT) {
             "you can order $MAX_ORDER_MENU_AMOUNT menus at one time"
         }
     }
