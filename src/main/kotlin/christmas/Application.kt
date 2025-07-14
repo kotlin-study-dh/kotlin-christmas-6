@@ -23,4 +23,7 @@ fun main() {
     OutputView.printPromotionBenefits(promotionBenefits)
     OutputView.printBenefitPrice(benefitPrice)
     OutputView.printPaymentPrice(orders.totalPrice().subtract(discountPrice))
+
+    val eventBadge = PromotionService.findEventBadge(promotionBenefits)
+    OutputView.printEventBadge(eventBadge)
 }

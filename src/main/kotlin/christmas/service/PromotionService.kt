@@ -5,6 +5,7 @@ import christmas.domain.money.Money
 import christmas.domain.order.Orders
 import christmas.domain.product.Product
 import christmas.domain.promotion.PromotionBenefit
+import christmas.domain.promotion.eventbadge.EventBadge
 import christmas.domain.promotion.strategy.*
 
 object PromotionService {
@@ -66,5 +67,10 @@ object PromotionService {
         }
 
         return discountPrice
+    }
+
+    fun findEventBadge(promotionBenefits: List<PromotionBenefit>): EventBadge? {
+        val benefitPrice = findBenefitPrice(promotionBenefits)
+        return EventBadge.of(benefitPrice)
     }
 }

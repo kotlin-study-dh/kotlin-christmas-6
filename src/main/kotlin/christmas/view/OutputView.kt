@@ -5,6 +5,7 @@ import christmas.domain.money.Money
 import christmas.domain.order.Orders
 import christmas.domain.product.Product
 import christmas.domain.promotion.PromotionBenefit
+import christmas.domain.promotion.eventbadge.EventBadge
 import java.text.DecimalFormat
 
 object OutputView {
@@ -69,6 +70,11 @@ object OutputView {
         println("<할인 후 예상 결제 금액>")
         println(formatMoney(paymentPrice))
         println()
+    }
+
+    fun printEventBadge(eventBadge: EventBadge?) {
+        println("<12월 이벤트 배지>")
+        println(EventBadgeNameMapper.map(eventBadge))
     }
 
     private fun formatMoney(money: Money): String {
