@@ -12,4 +12,7 @@ fun main() {
     OutputView.printEventDescription(12, visitDate)
     OutputView.printOrderDetails(orders)
     OutputView.printTotalPriceBeforeDiscount(orders.totalPrice())
+
+    val promotionDetails = OrderService.getPromotionDetails(orders)
+    OutputView.printPromotionDetails(promotionDetails, orders)
 }

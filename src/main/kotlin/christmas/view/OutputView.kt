@@ -1,5 +1,6 @@
 package christmas.view
 
+import christmas.configuration.promotion.Promotion
 import christmas.domain.money.Currency
 import christmas.domain.money.Money
 import christmas.domain.order.Orders
@@ -21,8 +22,29 @@ object OutputView {
 
     fun printTotalPriceBeforeDiscount(price: Money) {
         println("<할인 전 총주문 금액>")
-        val formattedNumber = DecimalFormat("#,###.##").format(price.amount)
-        val currencyDisplayName = if (price.currency == Currency.KRW) "원" else price.currency
-        println("${formattedNumber}$currencyDisplayName")
+        println("${priceDisplayName(price)}${currencyDisplayName(price)}")
+        println()
+    }
+
+    fun printPromotionDetails(promotions: List<Promotion>, orders: Orders) {
+        println("<혜택 내역>")
+        promotions.forEach { promotion ->
+            val name = PromotionNameMapper.map(promotion)
+            val amount = promotion.discountAmount(orders)
+            println("$name: -${priceDisplayName(amount)}원") // TODO display discount amount for giveaways
+        }
+        println()
+    }
+
+    private fun priceDisplayName(price: Money): String {
+        return DecimalFormat("#,###.##").format(price.amount)
+    }
+
+    private fun currencyDisplayName(money: Money): String {
+        if (money.currency == Currency.KRW) {
+            return "원"
+        }
+
+        return money.currency.toString()
     }
 }
