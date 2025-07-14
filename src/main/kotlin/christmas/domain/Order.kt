@@ -1,0 +1,40 @@
+package christmas.domain
+
+import java.time.DayOfWeek
+import java.time.LocalDate
+
+class Order(
+    val menus: Map<Menu, Int>,
+    private val orderDate: Date
+) {
+
+    init {
+        require(menus.values.sumOf { it } <= MAX_ORDER_MENU_AMOUNT) {
+            "you can order $MAX_ORDER_MENU_AMOUNT menus at one time"
+        }
+    }
+
+    constructor(menus: Map<Menu, Int>, orderDate: Int) : this(menus, Date(orderDate))
+
+    fun getDayOfWeek(): DayOfWeek {
+        val decemberFirst = LocalDate.of(EVENT_YEAR, DECEMBER, DECEMBER_START_DATE)
+        return decemberFirst.plusDays((date - 1).toLong()).dayOfWeek
+    }
+
+    fun countMenuByCategory(category: MenuCategory) =
+        menus.filter { it.key.category == category }.values.sum()
+
+    val totalPrice: Int
+        get() = menus.entries.sumOf { (menu, count) -> menu.price * count }
+
+    val date: Int
+        get() = orderDate.date
+
+    companion object {
+        private const val MAX_ORDER_MENU_AMOUNT = 20
+        private const val DECEMBER_START_DATE = 1
+        private const val DECEMBER_END_DATE = 31
+        private const val EVENT_YEAR = 2023
+        private const val DECEMBER = 12
+    }
+}
