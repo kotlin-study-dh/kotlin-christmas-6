@@ -3,6 +3,7 @@ package christmas.domain.event.discount
 import christmas.domain.order.Menu
 import christmas.domain.order.Price
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit.DAYS
 
 object ChristmasDdayDiscountPolicy : DiscountPolicy() {
     override val name = "Christmas D-Day Discount"
@@ -17,7 +18,7 @@ object ChristmasDdayDiscountPolicy : DiscountPolicy() {
 
     override fun getBenefitAmount(placedDate: LocalDate, orderItems: Map<Menu, Int>): Price {
         require(isEligibleFor(placedDate, orderItems)) { "This order is not eligible for this discount policy." }
-        val daysBetween = placedDate.toEpochDay() - START_DATE.toEpochDay()
+        val daysBetween = DAYS.between(START_DATE, placedDate)
         return Price.from(BASE_BENEFIT_AMOUNT + (daysBetween.toInt() * INCREMENT_PER_DAY))
     }
 }
