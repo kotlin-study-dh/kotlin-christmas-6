@@ -19,9 +19,9 @@ enum class Menu(
     CHAMPAGNE("Champagne", Price.from(25_000), MenuSection.BEVERAGE), ;
 
     companion object {
-        fun from(name: String): Menu =
-            Menu.entries.firstOrNull { it.displayName == name }
-                ?: throw IllegalArgumentException("Invalid menu name. Please enter the displayed name exactly.")
+        private val displayNameToValue: Map<String, Menu> = Menu.entries.associateBy { it.displayName }
+        fun from(displayName: String): Menu =
+            displayNameToValue[displayName] ?: throw IllegalArgumentException("Invalid menu name. Please enter the displayed name exactly.")
     }
 }
 
