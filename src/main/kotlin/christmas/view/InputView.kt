@@ -28,12 +28,8 @@ object InputView {
                         "(e.g. Seafood Pasta-2,Red Wine-1,Chocolate Cake-1)"
             )
             val orderItems = Console.readLine().split(",")
-                .associate { it ->
-                    val split = it.split("-")
-                    val menu = Menu.from(split[0])
-                    val quantity = split[1].toInt()
-                    menu to quantity
-                }
+                .map { it.split("-", limit = 2) }
+                .associate { (name, quantity) -> Menu.from(name) to quantity.toInt() }
             return Order.of(placedDate, orderItems)
         }
     }
